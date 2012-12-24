@@ -1,5 +1,23 @@
 Dispatch::Application.routes.draw do
+  get "reports/new"
+
+  resources :sessions, except: :index
+
+  match '/sessions' => 'sessions#create'
+  match '/user/reports' => 'reports#index'
+  match '/sessions/log-out' =>'sessions#delete'
+
   get "main/index"
+
+  resources :reports, except: :index
+
+  resources :perpetrators do
+    resources :reports
+  end
+
+  resources :users do
+    resources :reports
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

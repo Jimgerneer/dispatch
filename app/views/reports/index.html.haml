@@ -1,0 +1,36 @@
+= link_to 'Create Report', new_report_path, id: 'create-report'
+
+.row-fluid
+  .span12
+    .span4.offset2
+      - if @perpetrator.present?
+        %h3= "Reports against #{@perpetrator.name}"
+        - @reports.each do |r|
+          %dl
+            .well.well-small
+              %dt Filed by:
+              - user = User.where(id: r.user_id).first
+              %dd= user.username
+              %dt Evidence:
+              %dd= r.evidence
+              %dt Bounty offered:
+              %dd= "#{r.bounty} diamonds"
+              %dt Location:
+              %dd= r.location
+              %dt Time:
+              %dd= r.time
+      - else
+        - @reports.each do |r|
+          %dl
+            .well.well-small
+              %dt Evidence:
+              %dd= r.evidence
+              %dt Bounty offered:
+              %dd= "#{r.bounty} diamonds"
+              %dt Location:
+              %dd= r.location
+              %dt Time:
+              %dd= r.time
+              %dt
+              = link_to "Edit", controller: 'reports', action: 'edit', id: r.id
+              = link_to "Close", controller: 'reports', action: 'destroy', id: r.id

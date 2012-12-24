@@ -1,0 +1,13 @@
+= form_for @report do |form|
+  = form.label :evidence
+  = form.text_area :evidence
+  = form.label :location
+  = form.text_field :location
+  = form.label :time
+  = form.text_field :time
+  = form.label :bounty
+  = form.text_field :bounty
+  = form.select :perpetrator_id, Perpetrator.all.map { |p| [p.name, p.id] }.unshift(['not listed', nil])
+  = form.label :new_perpetrator, 'New Perpetrator'
+  = form.text_field :new_perpetrator
+  = form.submit

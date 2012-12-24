@@ -1,2 +1,11 @@
-%h1 Main#index
-%p Find me in app/views/main/index.html.haml
+.row-fluid
+  .span12
+    .span4.offset2
+      %h3 Current Cases
+      - @perps.each do |p|
+        %h4= p.name
+        %dl
+          .well.well-small
+            %dt Bounty:
+            %dd
+            %dt= link_to 'See Case', [p, :reports]
