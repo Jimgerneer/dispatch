@@ -57,9 +57,11 @@ GEM
       capybara (>= 1.1.2)
       cucumber (>= 1.1.8)
       nokogiri (>= 1.5.0)
+    daemons (1.1.9)
     database_cleaner (0.9.1)
     diff-lcs (1.1.3)
     erubis (2.7.0)
+    eventmachine (1.0.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
     faraday (0.8.4)
@@ -155,6 +157,10 @@ GEM
       multi_json (~> 1.0)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
+    thin (1.5.0)
+      daemons (>= 1.0.9)
+      eventmachine (>= 0.12.6)
+      rack (>= 1.0.0)
     thor (0.16.0)
     tilt (1.3.3)
     treetop (1.4.12)
@@ -191,5 +197,6 @@ DEPENDENCIES
   quiet_assets
   rails (= 3.2.9)
   sass-rails (~> 3.2.3)
+  thin
   twitter-bootstrap-rails
   uglifier (>= 1.0.3)

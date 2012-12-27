@@ -9,6 +9,7 @@ gem 'pg'
 gem 'oauth2'
 gem 'faraday'
 gem 'faraday_middleware'
+gem 'thin'
 
 # Gems used only for assets and not required
 # in production environments by default.
