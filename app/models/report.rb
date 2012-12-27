@@ -1,8 +1,12 @@
 class Report < ActiveRecord::Base
-  attr_accessible :user_id, :evidence, :location, :time, :perpetrator_id, :new_perpetrator, :bounty, :active
+  attr_accessible :user_id, :evidence, :location, :time, :perpetrator_id, :new_perpetrator, :bounty, :active, :x_coord, :y_coord
   attr_accessor :new_perpetrator
 
   before_validation :create_new_perpetrator
+
+  validates :x_coord, :y_coord, :numericality => true, :allow_blank => true
+  validates :evidence, :bounty, presence: true
+  validates :bounty, :numericality => true
 
   belongs_to :perpetrator
   belongs_to :user

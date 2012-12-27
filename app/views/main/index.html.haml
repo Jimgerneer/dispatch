@@ -1,11 +1,29 @@
 .row-fluid
   .span12
+    .span6.offset2
+      %h3 Current Active Cases
+.row-fluid
+  .span12
+.row-fluid
+  .span12
     .span4.offset2
-      %h3 Current Cases
+      %h3 Most Records
+      .row-fluid
       - @perps.each do |p|
-        %h4= p.name
-        %dl
+        .span6
+          %h4= link_to p.name, [p, :reports]
+        .span6
           .well.well-small
-            %dt Bounty:
-            %dd
-            %dt= link_to 'See Case', [p, :reports]
+            %h6= "Current max bounty: #{p.max_bounty}"
+            %h6= "Number of Records: #{p.record_count}"
+    .span4
+      %h3 Highest Bounty
+      .row-fluid
+      - @perps_by_bounty.each do |p|
+        .span6
+          %h4= link_to p.name, [p, :reports]
+        .span6
+          .well.well-small
+            %h6= "Current max bounty: #{p.max_bounty}"
+            %h6= "Number of Records: #{p.record_count}"
+    .span2

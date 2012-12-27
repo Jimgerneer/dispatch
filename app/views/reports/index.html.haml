@@ -1,12 +1,10 @@
-= link_to 'Create Report', new_report_path, id: 'create-report'
-
 .row-fluid
   .span12
-    .span4.offset2
+    .span8.offset2
       - if @perpetrator.present?
         %h3= "Reports against #{@perpetrator.name}"
         - @reports.each do |r|
-          %dl
+          %dl{class: 'dl-horizontal'}
             .well.well-small
               %dt Filed by:
               - user = User.where(id: r.user_id).first
@@ -14,23 +12,35 @@
               %dt Evidence:
               %dd= r.evidence
               %dt Bounty offered:
-              %dd= "#{r.bounty} diamonds"
-              %dt Location:
-              %dd= r.location
-              %dt Time:
-              %dd= r.time
+              %dd= "#{r.bounty}d"
+              - if r.location.present?
+                %dt Location:
+                %dd= r.location
+              - if r.time.present?
+                %dt Time:
+                %dd= r.time
+              - if r.x_coord.present? && r.y_coord.present?
+                %dt Coordinates:
+                %dd= "(#{r.x_coord}, #{r.y_coord})"
       - else
         - @reports.each do |r|
-          %dl
+          - perp = Perpetrator.find(r.perpetrator_id)
+          %h4= "Report against #{perp.name}"
+          %dl{class: 'dl-horizontal'}
             .well.well-small
               %dt Evidence:
               %dd= r.evidence
               %dt Bounty offered:
-              %dd= "#{r.bounty} diamonds"
-              %dt Location:
-              %dd= r.location
-              %dt Time:
-              %dd= r.time
+              %dd= "#{r.bounty}d"
+              - if r.location.present?
+                %dt Location:
+                %dd= r.location
+              - if r.time.present?
+                %dt Time:
+                %dd= r.time
+              - if r.x_coord.present? && r.y_coord.present?
+                %dt Coordinates:
+                %dd= "(#{r.x_coord}, #{r.y_coord})"
               %dt
               = link_to "Edit", controller: 'reports', action: 'edit', id: r.id
               = link_to "Close", controller: 'reports', action: 'destroy', id: r.id

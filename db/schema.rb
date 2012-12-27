@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121220232321) do
+ActiveRecord::Schema.define(:version => 20121227062832) do
 
   create_table "perpetrators", :force => true do |t|
     t.string   "name"
@@ -29,6 +29,8 @@ ActiveRecord::Schema.define(:version => 20121220232321) do
     t.integer  "perpetrator_id"
     t.integer  "bounty",         :default => 0,    :null => false
     t.integer  "user_id"
+    t.integer  "x_coord"
+    t.integer  "y_coord"
   end
 
   add_index "reports", ["perpetrator_id"], :name => "index_reports_on_perpetrator_id"

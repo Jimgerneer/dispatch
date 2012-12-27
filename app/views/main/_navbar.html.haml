@@ -1,4 +1,27 @@
-= link_to 'Create Report', new_report_path, id: 'create-report'
-= link_to 'Log in', new_session_path, id: 'log-in'
-= link_to 'Log out', controller: 'sessions', action: 'delete'
-= link_to 'My Reports', user_reports_path
+.navbar.navbar-fixed-top
+  .navbar-inner
+    .container-fluid
+      .row-fluid
+        .span12
+          .span1
+            .span1
+              %h6 Beta
+          %a.brand{href: '/'}
+            %h3 CivPearl
+          .span3
+          .nav-collapse
+            - if session[:user_id].nil?
+              %ul.nav
+                %li
+                  = link_to 'Log in', new_session_path, id: 'log-in'
+                  %li{class: "divider-vertical"}
+            - else
+              %ul.nav
+                %li
+                  = link_to 'Create Report', new_report_path, id: 'create-report'
+                  %li{class: "divider-vertical"}
+                %li
+                  = link_to 'Log out', controller: 'sessions', action: 'delete'
+                  %li{class: "divider-vertical"}
+                %li
+                  = link_to 'My Reports', user_reports_path

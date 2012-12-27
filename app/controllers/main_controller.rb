@@ -1,12 +1,7 @@
 class MainController < ApplicationController
 
-  before_filter :load_scope
-
   def index
-    @perps = @scope.active_reports.all
-  end
-
-  def load_scope
-    @scope = Perpetrator
+    @perps = Perpetrator.leaderboard.all(order: "record_count DESC")
+    @perps_by_bounty = Perpetrator.leaderboard.all(order: "max_bounty DESC")
   end
 end

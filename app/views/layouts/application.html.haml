@@ -1,11 +1,13 @@
-%html¬
-%head¬
-%meta{:charset => "utf-8"}¬
-%title Dispatch
-= stylesheet_link_tag    "application", :media => "all"
-= javascript_include_tag "application"
-= csrf_meta_tags
+%html
+  %head
+    %meta{:charset => "utf-8"}
+    %title Dispatch
+    = stylesheet_link_tag    "application", :media => "all"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
 
-%body
-= render partial: "navbar"
-= yield
+  %body
+  = render partial: "main/navbar"
+  = render partial: "layouts/flash_messages"
+
+  = yield

@@ -18,7 +18,7 @@ class ReportsController < ApplicationController
       flash[:notice] = "Your report has been filed"
       redirect_to '/'
     else
-      flash.now[:error] = "Your report was not created"
+      flash.now[:error] = "Report was not filed, missing required information"
       render action: "new"
     end
   end

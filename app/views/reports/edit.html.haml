@@ -1,13 +1,25 @@
-= form_for @report do |form|
-  = form.label :evidence
-  = form.text_area :evidence
-  = form.label :location
-  = form.text_field :location
-  = form.label :time
-  = form.text_field :time
-  = form.label :bounty
-  = form.text_field :bounty
-  = form.select :perpetrator_id, Perpetrator.all.map { |p| [p.name, p.id] }.unshift(['not listed', nil])
-  = form.label :new_perpetrator, 'New Perpetrator'
-  = form.text_field :new_perpetrator
-  = form.submit
+.row-fluid
+  .span12
+    .span10.offset2
+      = form_for @report do |form|
+        = form.label :evidence
+        = form.text_area :evidence
+        = form.label :bounty
+        = form.text_field :bounty
+        = form.label :new_perpetrator, 'Perpetrator'
+        = form.text_field :new_perpetrator
+        = form.select :perpetrator_id, Perpetrator.all.map { |p| [p.name, p.id] }.unshift(['not listed', nil])
+        .row-fluid
+          .span12
+          %h6 Optional Information
+          = form.label :location
+          = form.text_field :location
+          = form.label :time
+          = form.text_field :time
+          = form.label :x_coord
+          = form.text_field :x_coord
+          = form.label :y_coord
+          = form.text_field :y_coord
+        .row-fluid
+          .span12
+          = form.submit
