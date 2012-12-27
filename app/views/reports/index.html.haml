@@ -9,16 +9,19 @@
               %dt Filed by:
               - user = User.where(id: r.user_id).first
               %dd= link_to user.username, "http://www.reddit.com/message/compose/?to=#{user.username}"
+              %dt Description:
+              %dd= r.description
               %dt Evidence:
-              %dd= r.evidence
+              %dd= link_to "Link", r.evidence
               %dt Bounty offered:
               %dd= "#{r.bounty}d"
+              - if r.civilization_id.present?
+                - civ = Civilization.where(id: r.civilization_id).first
+                %dt Civ:
+                %dd= civ.name
               - if r.location.present?
                 %dt Location:
                 %dd= r.location
-              - if r.time.present?
-                %dt Time:
-                %dd= r.time
               - if r.x_coord.present? && r.y_coord.present?
                 %dt Coordinates:
                 %dd= "(#{r.x_coord}, #{r.y_coord})"
@@ -28,16 +31,19 @@
           %h4= "Report against #{perp.name}"
           %dl{class: 'dl-horizontal'}
             .well.well-small
+              %dt Description:
+              %dd= r.description
               %dt Evidence:
-              %dd= r.evidence
+              %dd= link_to "Link", r.evidence
               %dt Bounty offered:
               %dd= "#{r.bounty}d"
+              - if r.civilization_id.present?
+                - civ = Civilization.where(id: r.civilization_id).first
+                %dt Civ:
+                %dd= civ.name
               - if r.location.present?
                 %dt Location:
                 %dd= r.location
-              - if r.time.present?
-                %dt Time:
-                %dd= r.time
               - if r.x_coord.present? && r.y_coord.present?
                 %dt Coordinates:
                 %dd= "(#{r.x_coord}, #{r.y_coord})"

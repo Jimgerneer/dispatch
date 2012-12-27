@@ -2,20 +2,23 @@
   .span12
     .span10.offset2
       = form_for @report do |form|
-        = form.label :evidence
-        = form.text_area :evidence, size: "60x12", value: "Description of what happened and links to evidence, better formatting coming soon."
-        = form.label :bounty
-        = form.text_field :bounty
-        = form.label :new_perpetrator, 'Perpetrator'
-        = form.text_field :new_perpetrator
+        = form.label :perpetrator_name, 'Perpetrator'
+        = form.text_field :perpetrator_name, placeholder: "create new or select ---->"
         = form.select :perpetrator_id, Perpetrator.all.map { |p| [p.name, p.id] }.unshift(['not listed', nil])
+        = form.label :description
+        = form.text_area :description, size: "15x15", placeholder: "Description of incident *required"
+        = form.label :evidence
+        = form.text_field :evidence, placeholder: "Imugur Link *required"
+        = form.label :bounty, "Bounty (Diamonds)"
+        = form.text_field :bounty
         .row-fluid
           .span12
           %h6 Optional Information
-          = form.label :location, 'City, or nearest city'
+          = form.label :civilization_name, 'Your Civilization'
+          = form.text_field :civilization_name, placeholder: "create new or select ---->"
+          = form.select :civilization_id, Civilization.all.map { |c| [c.name, c.id] }.unshift(['not listed', nil])
+          = form.label :location, 'Location of Crime (City, Nearest City or Name of Area)'
           = form.text_field :location
-          = form.label :time, 'Time / Time Zone'
-          = form.text_field :time
           %h6 Exact Location if available
           = form.label :x_coord
           = form.text_field :x_coord

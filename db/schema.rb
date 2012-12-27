@@ -11,7 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121227062832) do
+ActiveRecord::Schema.define(:version => 20121227200515) do
+
+  create_table "civilizations", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "perpetrators", :force => true do |t|
     t.string   "name"
@@ -20,19 +26,21 @@ ActiveRecord::Schema.define(:version => 20121227062832) do
   end
 
   create_table "reports", :force => true do |t|
-    t.text     "evidence"
+    t.string   "evidence"
     t.string   "location"
-    t.string   "time"
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
-    t.boolean  "active",         :default => true
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
+    t.boolean  "active",          :default => true
     t.integer  "perpetrator_id"
-    t.integer  "bounty",         :default => 0,    :null => false
+    t.integer  "bounty",          :default => 0,    :null => false
     t.integer  "user_id"
     t.integer  "x_coord"
     t.integer  "y_coord"
+    t.text     "description"
+    t.integer  "civilization_id"
   end
 
+  add_index "reports", ["civilization_id"], :name => "index_reports_on_civilization_id"
   add_index "reports", ["perpetrator_id"], :name => "index_reports_on_perpetrator_id"
 
   create_table "users", :force => true do |t|

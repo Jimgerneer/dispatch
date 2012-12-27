@@ -18,7 +18,7 @@ class ReportsController < ApplicationController
       flash[:notice] = "Your report has been filed"
       redirect_to '/'
     else
-      flash.now[:error] = "Report was not filed, missing required information"
+      flash.now[:error] = @report.errors.full_messages.join(", ")
       render action: "new"
     end
   end
@@ -32,6 +32,7 @@ class ReportsController < ApplicationController
       if @report.update_attributes params[:report]
         redirect_to "/user/reports"
       else
+        flash.now[:error] = @report.errors.full_messages.join(", ")
         render :action => :edit
     end
   end
