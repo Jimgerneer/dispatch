@@ -8,7 +8,7 @@
             .well.well-small
               %dt Filed by:
               - user = User.where(id: r.user_id).first
-              %dd= user.username
+              %dd= link_to user.username, "http://www.reddit.com/message/compose/?to=#{user.username}"
               %dt Evidence:
               %dd= r.evidence
               %dt Bounty offered:
