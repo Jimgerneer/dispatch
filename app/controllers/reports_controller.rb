@@ -41,7 +41,7 @@ class ReportsController < ApplicationController
   end
 
   def destroy
-    @report = Report.find params[:id]
+    @report = Report.for_author(current_user.id).find params[:id]
     @report.close
     redirect_to "/user/reports"
   end
