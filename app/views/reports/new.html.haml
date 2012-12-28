@@ -7,13 +7,13 @@
         = form.select :perpetrator_id, Perpetrator.all.map { |p| [p.name, p.id] }.unshift(['not listed', nil])
         = form.label :description
         = form.text_area :description, size: "15x15", placeholder: "Description of incident *required"
-        = form.label :evidence
-        = form.text_field :evidence, placeholder: "Imgur Link *required"
         = form.label :bounty, "Bounty (Diamonds)"
         = form.text_field :bounty
         .row-fluid
           .span12
           %h6 Optional Information
+          = form.label :evidence
+          = form.text_field :evidence, placeholder: "Imgur Link"
           = form.label :civilization_name, 'Your Civilization'
           = form.text_field :civilization_name, placeholder: "create new or select ---->"
           = form.select :civilization_id, Civilization.all.map { |c| [c.name, c.id] }.unshift(['not listed', nil])

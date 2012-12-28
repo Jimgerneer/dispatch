@@ -6,9 +6,9 @@ class Report < ActiveRecord::Base
   before_validation :create_new_civilization
 
   validates :x_coord, :y_coord, :numericality => true, :allow_blank => true
-  validates :description, :evidence, :bounty, presence: true
+  validates :description, :bounty, presence: true
   validates :bounty, :numericality => true
-  validates_format_of :evidence, :with => URI::regexp(%w(http https))
+  validates_format_of :evidence, :with => URI::regexp(%w(http https)), :allow_blank => true
 
   belongs_to :perpetrator
   belongs_to :civilization

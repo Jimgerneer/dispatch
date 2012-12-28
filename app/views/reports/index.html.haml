@@ -11,8 +11,9 @@
               %dd= link_to user.username, "http://www.reddit.com/message/compose/?to=#{user.username}"
               %dt Description:
               %dd= r.description
-              %dt Evidence:
-              %dd= link_to "Link", r.evidence
+              - if r.evidence.present?
+                %dt Evidence:
+                %dd= link_to "Link", r.evidence
               %dt Bounty offered:
               %dd= "#{r.bounty}d"
               - if r.civilization_id.present?
@@ -34,8 +35,9 @@
               .well.well-small
                 %dt Description:
                 %dd= r.description
-                %dt Evidence:
-                %dd= link_to "Link", r.evidence
+                - if r.evidence.present?
+                  %dt Evidence:
+                  %dd= link_to "Link", r.evidence
                 %dt Bounty offered:
                 %dd= "#{r.bounty}d"
                 - if r.civilization_id.present?
