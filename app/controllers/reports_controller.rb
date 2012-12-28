@@ -4,7 +4,7 @@ class ReportsController < ApplicationController
   before_filter :logged_in?, :except => [:index]
 
   def index
-    @reports = @scope.active.recent.all
+    @reports = @scope.active.recent
     @perpetrator = Perpetrator.find params[:perpetrator_id] if params[:perpetrator_id].present?
   end
 
@@ -24,11 +24,11 @@ class ReportsController < ApplicationController
   end
 
   def edit
-    @report = Report.find params[:id]
+    @report = Report.for_author(current_user.id).find params[:id]
   end
 
   def update
-    @report = Report.find params[:id]
+    @report = Report.for_author(current_user.id).find params[:id]
       if @report.update_attributes params[:report]
         redirect_to "/user/reports"
       else
@@ -38,7 +38,6 @@ class ReportsController < ApplicationController
   end
 
   def show
-    self.destroy
   end
 
   def destroy
@@ -58,6 +57,6 @@ class ReportsController < ApplicationController
   def load_scope
     @scope = Report
     @scope = @scope.for_perp(params[:perpetrator_id]) if params[:perpetrator_id].present?
-    @scope = @scope.for_author(current_user.id) if session[:user_id].present? and request == "/user/reports"
+    @scope = @scope.for_author(current_user.id) if session[:user_id].present? and request.path == "/user/reports"
   end
 end

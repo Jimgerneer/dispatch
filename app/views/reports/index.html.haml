@@ -28,28 +28,27 @@
                 %dd= "(#{r.x_coord}, #{r.y_coord})"
       - else
         - @reports.each do |r|
-          - if r.user_id == session[:user_id]
-            - perp = Perpetrator.find(r.perpetrator_id)
-            %h4= "Report against #{perp.name}"
-            %dl{class: 'dl-horizontal'}
-              .well.well-small
-                %dt Description:
-                %dd= r.description
-                - if r.evidence.present?
-                  %dt Evidence:
-                  %dd= link_to "Link", r.evidence
-                %dt Bounty offered:
-                %dd= "#{r.bounty}d"
-                - if r.civilization_id.present?
-                  - civ = Civilization.where(id: r.civilization_id).first
-                  %dt Civ:
-                  %dd= civ.name
-                - if r.location.present?
-                  %dt Location:
-                  %dd= r.location
-                - if r.x_coord.present? && r.y_coord.present?
-                  %dt Coordinates:
-                  %dd= "(#{r.x_coord}, #{r.y_coord})"
-                %dt
-                = link_to "Edit", controller: 'reports', action: 'edit', id: r.id
-                = link_to "Close", controller: 'reports', action: 'destroy', id: r.id
+          - perp = Perpetrator.find(r.perpetrator_id)
+          %h4= "Report against #{perp.name}"
+          %dl{class: 'dl-horizontal'}
+            .well.well-small
+              %dt Description:
+              %dd= r.description
+              - if r.evidence.present?
+                %dt Evidence:
+                %dd= link_to "Link", r.evidence
+              %dt Bounty offered:
+              %dd= "#{r.bounty}d"
+              - if r.civilization_id.present?
+                - civ = Civilization.where(id: r.civilization_id).first
+                %dt Civ:
+                %dd= civ.name
+              - if r.location.present?
+                %dt Location:
+                %dd= r.location
+              - if r.x_coord.present? && r.y_coord.present?
+                %dt Coordinates:
+                %dd= "(#{r.x_coord}, #{r.y_coord})"
+              %dt
+              = link_to "Edit", edit_report_path(r)
+              = link_to "Close", report_path(r), method: :delete
