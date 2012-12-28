@@ -27,7 +27,7 @@
                 %dd= "(#{r.x_coord}, #{r.y_coord})"
       - else
         - @reports.each do |r|
-          - if r.user_id = session[:user_id]
+          - if r.user_id == session[:user_id]
             - perp = Perpetrator.find(r.perpetrator_id)
             %h4= "Report against #{perp.name}"
             %dl{class: 'dl-horizontal'}
