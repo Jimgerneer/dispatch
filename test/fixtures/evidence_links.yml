@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  report_id: 1
+  link_text: MyString
+
+two:
+  report_id: 1
+  link_text: MyString

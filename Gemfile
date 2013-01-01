@@ -11,6 +11,7 @@ gem 'faraday'
 gem 'faraday_middleware'
 gem 'thin'
 gem 'haml-rails'
+gem 'markdownizer'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -37,6 +38,7 @@ end
 
 group :development do
   gem 'quiet_assets'
+  gem 'taps'
 end
 
 # To use ActiveModel has_secure_password

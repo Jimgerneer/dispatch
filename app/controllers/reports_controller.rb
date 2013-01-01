@@ -10,12 +10,13 @@ class ReportsController < ApplicationController
 
   def new
     @report = @scope.new
+    3.times { @report.evidence_links.build }
   end
 
   def create
     @report = @scope.new(params[:report].merge(user_id: session[:user_id]))
     if @report.save
-      flash[:notice] = "Your report has been filed"
+      flash[:notice] = %Q[Your report has been filed <a href="/perpetrators/#{@report.perpetrator_id}/reports">CLick Here</a> to see].html_safe
       redirect_to '/'
     else
       flash.now[:error] = @report.errors.full_messages.join(", ")
@@ -25,6 +26,7 @@ class ReportsController < ApplicationController
 
   def edit
     @report = Report.for_author(current_user.id).find params[:id]
+    3.times { @report.evidence_links.build }
   end
 
   def update

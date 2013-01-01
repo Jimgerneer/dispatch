@@ -1,5 +1,5 @@
 class Report < ActiveRecord::Base
-  attr_accessible :user_id, :description, :evidence, :location, :perpetrator_id, :civilization_id, :perpetrator_name, :civilization_name, :bounty, :active, :x_coord, :y_coord
+  attr_accessible :user_id, :description, :rendered_description, :location, :perpetrator_id, :civilization_id, :perpetrator_name, :civilization_name, :bounty, :active, :x_coord, :y_coord, :evidence_links_attributes
   attr_accessor :perpetrator_name, :civilization_name
 
   before_validation :create_new_perpetrator
@@ -8,11 +8,16 @@ class Report < ActiveRecord::Base
   validates :x_coord, :y_coord, :numericality => true, :allow_blank => true
   validates :description, :bounty, presence: true
   validates :bounty, :numericality => true
-  validates_format_of :evidence, :with => URI::regexp(%w(http https)), :allow_blank => true
+
+  markdownize! :description
 
   belongs_to :perpetrator
   belongs_to :civilization
   belongs_to :user
+
+  has_many :evidence_links, dependent: :destroy
+  accepts_nested_attributes_for :evidence_links, :reject_if => lambda { |a| a[:link_text].blank? }, :allow_destroy => true
+  validates_associated :evidence_links
 
   scope :active, where(active: true)
   scope :recent, order('created_at DESC')

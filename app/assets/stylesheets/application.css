@@ -14,8 +14,84 @@
 body {
   padding-top: 125px;
   padding-bottom: 40px;
+  background: url('../nasty_fabric/nasty_fabric.png')
 }
 
 .navbar .nav {
   margin-top: 50px !important;
+}
+
+.report {
+  background: url('../navy_blue/navy_blue.png');
+  background-color: grey;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  width: 100%;
+  margin-bottom: 20px;
+  margin-left: 0px;
+}
+
+.report .author_link {
+  text-align: right;
+  padding-top: 45px;
+  margin-bottom: 0px;
+  margin-right: 15px;
+}
+
+.report h2 {
+  color: white;
+}
+
+.report .id_number {
+  padding-top: 10px;
+  text-align: left;
+}
+
+.report .perp_name {
+  padding-top: 15px;
+  margin-right: 15px;
+  margin-left: 5px;
+  color: white;
+}
+
+.report .description {
+  float: left;
+  margin-left: 20px;
+  width: 60%;
+}
+
+.report .metadata {
+  float: right;
+  margin-right: 10px;
+  width: 30%;
+}
+
+.report .metadata h5 {
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  background-color: grey;
+  padding-left: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.report .metadata p {
+  padding-left: 5px;
+}
+
+h2 {
+  padding-bottom: 25px;
+  padding-left: 25px
+}
+
+.timestamp {
+  color: white;
+  text-align: right;
+}
+
+.update_link {
+  font-size: large;
+}
+
+.form {
 }

@@ -1,54 +1,72 @@
 .row-fluid
   .span12
-    .span8.offset2
+    .span8.offset2.perpetrator
       - if @perpetrator.present?
-        %h3= "Reports against #{@perpetrator.name}"
+        %h2= "Reports against #{@perpetrator.name}"
         - @reports.each do |r|
-          %dl{class: 'dl-horizontal'}
-            .well.well-small
-              %dt Filed by:
+          .span12.report
+            .span6
+              %h2.id_number= "Report ##{r.created_at.to_i}-#{r.id}34"
+            .span4.offset2
               - user = User.where(id: r.user_id).first
-              %dd= link_to user.username, "http://www.reddit.com/message/compose/?to=#{user.username}"
-              %dt Description:
-              %dd= r.description
-              - if r.evidence.present?
-                %dt Evidence:
-                %dd= link_to "Link", r.evidence
-              %dt Bounty offered:
-              %dd= "#{r.bounty}d"
+              %h4.author_link= link_to "Filed by #{user.username}", "http://www.reddit.com/message/compose/?to=#{user.username}"
+            .description
+              .well.well-small
+                :markdown
+                  #{r.rendered_description}
+              %p.timestamp= "posted #{time_ago_in_words(r.created_at)} ago"
+            .metadata.well.well-small
+              %h5 Bounty offered
+              %p= "#{r.bounty}d"
+              - unless r.evidence_links.empty?
+                %h5 Evidence Links
+                %ul
+              - r.evidence_links.each do |link|
+                %li= link_to "Link", link.link_text
               - if r.civilization_id.present?
                 - civ = Civilization.where(id: r.civilization_id).first
-                %dt Civ:
-                %dd= civ.name
+                %h5 Civilization
+                %p= civ.name
               - if r.location.present?
-                %dt Location:
-                %dd= r.location
+                %h5 Location
+                %p= r.location
               - if r.x_coord.present? && r.y_coord.present?
-                %dt Coordinates:
-                %dd= "(#{r.x_coord}, #{r.y_coord})"
+                %h5 Coordinates
+                %p= "(#{r.x_coord}, #{r.y_coord})"
+
+
       - else
         - @reports.each do |r|
-          - perp = Perpetrator.find(r.perpetrator_id)
-          %h4= "Report against #{perp.name}"
-          %dl{class: 'dl-horizontal'}
-            .well.well-small
-              %dt Description:
-              %dd= r.description
-              - if r.evidence.present?
-                %dt Evidence:
-                %dd= link_to "Link", r.evidence
-              %dt Bounty offered:
-              %dd= "#{r.bounty}d"
-              - if r.civilization_id.present?
-                - civ = Civilization.where(id: r.civilization_id).first
-                %dt Civ:
-                %dd= civ.name
-              - if r.location.present?
-                %dt Location:
-                %dd= r.location
-              - if r.x_coord.present? && r.y_coord.present?
-                %dt Coordinates:
-                %dd= "(#{r.x_coord}, #{r.y_coord})"
-              %dt
-              = link_to "Edit", edit_report_path(r)
-              = link_to "Close", report_path(r), method: :delete
+          .span12.report
+            .span6
+              %h2.id_number= "Report ##{r.created_at.to_i}-#{r.id}"
+            .span4.offset2
+              - perp = Perpetrator.find(r.perpetrator_id)
+              %h3.perp_name= "#{perp.name}"
+            .description
+              .well.well-small
+                :markdown
+                  #{r.rendered_description}
+              %p.timestamp= "posted #{time_ago_in_words(r.created_at)} ago"
+            .metadata
+              .well.well-small
+                %h5 Bounty offered
+                %p= "#{r.bounty}d"
+                - unless r.evidence_links.empty?
+                  %h5 Evidence Links
+                  %ul
+                - r.evidence_links.each do |link|
+                  %li= link_to "Link", link.link_text
+                - if r.civilization_id.present?
+                  - civ = Civilization.where(id: r.civilization_id).first
+                  %h5 Civilization
+                  %p= civ.name
+                - if r.location.present?
+                  %h5 Location
+                  %p= r.location
+                - if r.x_coord.present? && r.y_coord.present?
+                  %h5 Coordinates
+                  %p= "(#{r.x_coord}, #{r.y_coord})"
+              %ul.nav.navbar.update_link
+                %li= link_to "Edit", edit_report_path(r)
+                %li= link_to "Close", report_path(r), method: :delete

@@ -11,13 +11,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121227200515) do
+ActiveRecord::Schema.define(:version => 20121231202618) do
 
   create_table "civilizations", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "evidence_links", :force => true do |t|
+    t.integer  "report_id"
+    t.string   "link_text"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "evidence_links", ["report_id"], :name => "index_evidence_links_on_report_id"
 
   create_table "perpetrators", :force => true do |t|
     t.string   "name"
@@ -26,18 +35,18 @@ ActiveRecord::Schema.define(:version => 20121227200515) do
   end
 
   create_table "reports", :force => true do |t|
-    t.string   "evidence"
     t.string   "location"
-    t.datetime "created_at",                        :null => false
-    t.datetime "updated_at",                        :null => false
-    t.boolean  "active",          :default => true
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
+    t.boolean  "active",               :default => true
     t.integer  "perpetrator_id"
-    t.integer  "bounty",          :default => 0,    :null => false
+    t.integer  "bounty",               :default => 0,    :null => false
     t.integer  "user_id"
     t.integer  "x_coord"
     t.integer  "y_coord"
     t.text     "description"
     t.integer  "civilization_id"
+    t.text     "rendered_description"
   end
 
   add_index "reports", ["civilization_id"], :name => "index_reports_on_civilization_id"
