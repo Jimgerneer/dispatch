@@ -1,0 +1,9 @@
+.span6.offset2
+  - @perps.each do |p|
+    .media.media-main
+      %a{class: "pull-left", href: "/perpetrators/#{p.id}/reports"}
+        %img{class: "media-object", src: "http://cravatar.tomheinan.com/#{p.name}/100"}
+      .media-body.media-body-main
+        %h4{class: "media-heading"}= p.name
+        %h6= "Current max bounty: #{p.max_bounty}d"
+        %h6= "Number of Reports: #{p.record_count}"

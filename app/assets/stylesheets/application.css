@@ -94,4 +94,134 @@ h2 {
 }
 
 .form {
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  background-color: white;
+}
+
+.form-required {
+  padding-left: 25px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
+.form-optional {
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  background-color: grey;
+  color: white;
+  padding-left: 25px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
+.form-checkbox {
+  padding-top: 20px;
+  padding-left: 30px;
+}
+
+.form-submit {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  background-color: red;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
+
+.form h4 {
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  background-color: black;
+  color: white;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 25px;
+}
+
+.perpetrator h1 {
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  background-color: red;
+  color: white;
+  padding-top: 10px;
+  padding-left: 15px;
+  padding-bottom: 10px;
+}
+
+.most-wanted-header {
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  background-color: black;
+  color: white;
+  padding-top: 10px;
+}
+
+.media-most-wanted {
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  background-color: white;
+  padding-left: 25px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
+.media-body-most-wanted {
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  background-color: black;
+  color: white;
+  width: 70%;
+}
+
+.media-body-most-wanted h2 {
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  background-color: red;
+  color: white;
+  padding-top: 15px;
+}
+
+.media-body-most-wanted h5 {
+  padding-left: 25px;
+}
+
+.wanted-header {
+border-radius: 5px;
+-webkit-border-radius: 5px;
+background-color: black;
+color: white;
+padding-top: 10px;
+}
+
+#user-nav {
+border-radius: 5px;
+-webkit-border-radius: 5px;
+background-color: white;
+text-size: large;
+padding-top: 10px;
+padding-bottom: 10px;
+}
+
+.media-main {
+border-radius: 5px;
+-webkit-border-radius: 5px;
+background-color: white;
+text-size: large;
+padding-top: 10px;
+padding-left: 15px;
+padding-bottom: 10px;
+}
+
+.media-body-main h4{
+border-radius: 5px;
+-webkit-border-radius: 5px;
+background-color: grey;
+color: white;
+padding-top: 10px;
+padding-bottom: 10px;
+padding-left: 15px;
+}
+
+.media-body-main h6{
 }

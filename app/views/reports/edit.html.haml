@@ -1,33 +1,58 @@
 .row-fluid
   .span12
-    .span10.offset2
+    .span6.offset2.form
+      %h4 Required Information
       = form_for @report do |form|
-        = form.label :perpetrator_name, 'Perpetrator'
-        = form.text_field :perpetrator_name
-        = form.select :perpetrator_id, Perpetrator.all.map { |p| [p.name, p.id] }.unshift(['not listed', nil])
-        = form.label :description
-        = form.text_area :description
-        = form.label :bounty
-        = form.text_field :bounty
+        .form-required
+          = form.label :perpetrator_name, 'Perpetrator'
+          = form.text_field :perpetrator_name, placeholder: "create new or select ---->"
+          = form.select :perpetrator_id, Perpetrator.all.map { |p| [p.name, p.id] }.unshift(['not listed', nil])
+          = form.label :description
+          = form.text_area :description, style: "width:500px", size: "50x15", 
+            placeholder: "Description of incident, Markdown Enabled, Post links in form below"
+          = form.label :bounty, "Bounty (Diamonds)"
+          = form.text_field :bounty
         .row-fluid
           .span12
-          %h6 Optional Information
-          - @report.evidence_links.each do |link|
-            = form.fields_for :evidence_links, link do |link_form|
-              = link_form.label :link_text, "Evidence Link"
-              = link_form.text_field :link_text
-              = link_form.check_box :_destroy
-              = link_form.label :_destroy, "Remove Link"
-          = form.label :civilization_name, 'Your Civilization'
-          = form.text_field :civilization_name
-          = form.select :civilization_id, Civilization.all.map { |c| [c.name, c.id] }.unshift(['not listed', nil])
-          = form.label :location, 'Location of Crime (City, Nearest City or Name of Area)'
-          = form.text_field :location
-          %h6 Exact Location if available
-          = form.label :x_coord
-          = form.text_field :x_coord
-          = form.label :y_coord
-          = form.text_field :y_coord
+            %h4 Optional Information
         .row-fluid
-          .span12
-          = form.submit
+          .span12.form-optional
+            .form-hortizontal
+              - @report.evidence_links.each do |link|
+                = form.fields_for :evidence_links, link do |link_form|
+                  .row-fluid
+                    .span3
+                      = link_form.label :link_text, "Evidence Link"
+                      = link_form.text_field :link_text
+                    .span4.form-checkbox
+                      = link_form.check_box :_destroy
+                      = link_form.label :_destroy, "Remove Link"
+              .control-group
+                .control-label
+                  = form.label :civilization_name, 'Your Civilization'
+                .controls
+                  = form.text_field :civilization_name, placeholder: "create new or select ---->"
+                  = form.select :civilization_id, Civilization.all.map { |c| [c.name, c.id] }.unshift(['not listed', nil])
+              .control-group
+                .control-label
+                  = form.label :location, 'Location of Crime (City, Nearest City or Name of Area)'
+                .controls
+                  = form.text_field :location
+          .row-fluid
+            .span12
+              %h4 Exact Location if available
+          .row-fluid
+            .span12.form-optional
+              .control-group
+                .control-label
+                  = form.label :x_coord
+                .controls
+                  = form.text_field :x_coord
+              .control-group
+                .control-label
+                  = form.label :y_coord
+                .controls
+                  = form.text_field :y_coord
+        .row-fluid
+          .span12.form-submit
+            = form.submit

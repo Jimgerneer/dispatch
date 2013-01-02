@@ -1,29 +1,31 @@
 .row-fluid
   .span12
     .span6.offset2
-      %h3 Current Active Cases
+      .most-wanted-header
+        %h2 Most Wanted
+      .media.media-most-wanted
+        %a{class: "pull-left", href: "/perpetrators/#{@most_wanted.id}/reports"}
+          %img{class: "media-object", src: "http://cravatar.tomheinan.com/#{@most_wanted.name}/200"}
+        .media-body.media-body-most-wanted
+          %h2.media-heading= @most_wanted.name
+          %h5= "Max Bounty: #{@most_wanted.max_bounty}d" 
+          %h5= "Number of Reports: #{@most_wanted.record_count}d" 
 .row-fluid
   .span12
 .row-fluid
   .span12
-    .span4.offset2
-      %h3 Most Records
-      .row-fluid
-      - @perps.each do |p|
-        .span6
-          %h4= link_to p.name, [p, :reports]
-        .span6
-          .well.well-small
-            %h6= "Current max bounty: #{p.max_bounty}d"
-            %h6= "Number of Reports: #{p.record_count}"
-    .span4
-      %h3 Highest Bounty
-      .row-fluid
-      - @perps_by_bounty.each do |p|
-        .span6
-          %h4= link_to p.name, [p, :reports]
-        .span6
-          .well.well-small
-            %h6= "Current max bounty: #{p.max_bounty}d"
-            %h6= "Number of Reports: #{p.record_count}"
-    .span2
+    .span6.offset2.wanted-header
+      %h2 Wanted
+
+.row-fluid
+  .span12
+    #user-nav.span6.offset2.nav.navbar
+      %ul(class="nav nav-pills")
+        %li
+          %a{href:  '/?order=highest_bounty', remote: true, id:  "Highest Bounty"}Highest Bounty
+        %li
+          %a{href:  '/?order=most_reports', remote: true, id:  "Most Records"}Most Records
+.row-fluid
+  .span12
+    #page-content
+      = render partial: "main/main_content", :layout => false
