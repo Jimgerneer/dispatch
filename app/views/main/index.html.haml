@@ -21,11 +21,34 @@
   .span12
     #user-nav.span6.offset2.nav.navbar
       %ul(class="nav nav-pills")
-        %li
-          %a{href:  '/?order=highest_bounty', remote: true, id:  "Highest Bounty"}Highest Bounty
-        %li
-          %a{href:  '/?order=most_reports', remote: true, id:  "Most Records"}Most Records
+        %li.dropdown
+          %a.dropdown-toggle(data-toggle="dropdown" href="#")
+            Highest Bounty
+            %b.caret
+          %ul.dropdown-menu
+            %li= link_to 'All', root_path(order: :highest_bounty), remote: true, id: "highest_bounty"
+            %li= link_to 'with Evidence', root_path(order: :highest_bounty_with_evidence), remote: true, id: "with_evidence"
+        %li.dropdown
+          %a.dropdown-toggle(data-toggle="dropdown" href="#")
+            Most Records
+            %b.caret
+          %ul.dropdown-menu
+            %li= link_to 'All', root_path(order: :most_reports), remote: true, id: "most_reports"
+            %li= link_to 'with Evidence', root_path(order: :most_reports_with_evidence), remote: true, id: "most_reports"
+        %li.dropdown
+          %a.dropdown-toggle(data-toggle="dropdown" href="#")
+            Filter by Civilization
+            %b.caret
+          %ul.dropdown-menu
+            - @civs.each do |civ|
+              %li.dropdown-submenu
+                %a.dropdown-toggle(data-toggle="dropdown" href="#")
+                  = civ.name
+                %b.caret
+                %ul.dropdown-menu
+                  %li= link_to 'All', root_path(evidence: false, civ: civ.to_param), remote: true
+                  %li= link_to 'with Evidence', root_path(evidence: true, civ: civ.to_param), remote: true
 .row-fluid
   .span12
     #page-content
-      = render partial: "main/main_content", :layout => false
+      = render partial: "main/main_content"
