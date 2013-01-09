@@ -6,7 +6,7 @@
         .form-required
           = form.label :perpetrator_name, 'Perpetrator'
           = form.text_field :perpetrator_name, placeholder: "create new or select ---->"
-          = form.select :perpetrator_id, Perpetrator.all.map { |p| [p.name, p.id] }.unshift(['not listed', nil])
+          = form.select :perpetrator_id, Perpetrator.find(:all, :order => "name").map { |p| [p.name, p.id] }.unshift(['not listed', nil])
           = form.label :description
           = form.text_area :description, style: "width:500px", size: "50x15", 
             placeholder: "Description of incident, Markdown Enabled, Post links in form below"
@@ -32,7 +32,7 @@
                   = form.label :civilization_name, 'Your Civilization'
                 .controls
                   = form.text_field :civilization_name, placeholder: "create new or select ---->"
-                  = form.select :civilization_id, Civilization.all.map { |c| [c.name, c.id] }.unshift(['not listed', nil])
+                  = form.select :civilization_id, Civilization.find(:all, :order => "name").map { |c| [c.name, c.id] }.unshift(['not listed', nil])
               .control-group
                 .control-label
                   = form.label :location, 'Location of Crime (City, Nearest City or Name of Area)'
