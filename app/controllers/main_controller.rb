@@ -3,7 +3,7 @@ class MainController < ApplicationController
   respond_to :html, :js
 
   def index
-    @perps = Perpetrator.leaderboard.sort_by_highest_bounty
+    @perps = Perpetrator.leaderboard.order("created_at DESC")
     @most_wanted = Perpetrator.leaderboard_with_evidence.sort_by_highest_bounty.first
     @civs = Civilization.active_list.order("name")
     if params[:order] == 'most_reports'
