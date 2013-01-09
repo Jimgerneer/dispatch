@@ -15,7 +15,7 @@ class RedditService
 *Thank you for using [CivBounty](http://www.civbounty.com)*
      }
 
-    url = "http://www.reddit.com/submit?title=#{CGI.escape(title)}&text=#{CGI.escape(text)}"
+    url = "http://www.reddit.com/r/Civcraft/submit?title=#{CGI.escape(title)}&text=#{CGI.escape(text)}"
   end
 
   def self.report_submit_link(report, perpetrator, user)
@@ -36,7 +36,7 @@ class RedditService
 *Thank you for using [CivBounty](http://www.civbounty.com)*
      }
 
-    url = "http://www.reddit.com/submit?title=#{CGI.escape(title)}&text=#{CGI.escape(text)}"
+    url = "http://www.reddit.com/r/Civcraft/submit?title=#{CGI.escape(title)}&text=#{CGI.escape(text)}"
   end
 
 =begin
