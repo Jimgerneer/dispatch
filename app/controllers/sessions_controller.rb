@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
 
   def new
-    redirect_url = oauth_client.auth_code.authorize_url(scope: 'identity', state: 23456, response_type: 'code', redirect_uri: sessions_url)
+    redirect_url = oauth_client.auth_code.authorize_url(scope: "identity", state: 23456, response_type: 'code', redirect_uri: sessions_url)
     redirect_to redirect_url
   end
 
@@ -22,7 +22,7 @@ class SessionsController < ApplicationController
       identity_response = token_client.get("https://oauth.reddit.com/api/v1/me")
       #parse body of response form JSON to hash
       identity_response_body = JSON.parse(identity_response.body)
-      #pull username out of hash
+      #pull username out of identity_response
       username = identity_response_body['name']
       #find_or_create_by_username
       user = User.find_or_create_by_username(username)
@@ -33,11 +33,6 @@ class SessionsController < ApplicationController
       flash[:error] = "Failed to Authenticate, is Reddit working?"
     end
   end
-
-  #def destroy
-  #  session[:user_id] = nil
-  #  redirect_to '/'
-  #end
 
   def delete
     session[:user_id] = nil

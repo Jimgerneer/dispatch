@@ -1,0 +1,57 @@
+.row-fluid
+  .span12
+    - if @report.active == true
+      .span8.offset2.perpetrator
+        .row-fluid
+          .span12
+            %h1= "Report against #{@perpetrator.name}"
+        .row-fluid
+          .span12.report-header
+            .span2.report-img
+              %img{class: "media-object", src: "http://cravatar.tomheinan.com/#{@perpetrator.name}/125"}
+            .span10.report-nav
+              %ul.nav.nav-pills
+                %li
+                  = link_to "All Reports on #{@perpetrator.name}", "/perpetrators/#{@perpetrator.id}/reports"
+                %li
+                  %a(id="redditPost" href=@reddit_url)
+                    Post to Reddit
+        .row-fluid
+          - r = @report
+          .span12.report
+            .span6
+              %h2.id_number= "Report ##{r.created_at.to_i}-#{r.id}"
+            .span4.offset2
+              - user = User.where(id: r.user_id).first
+              %h4.author_link= link_to "Filed by #{user.username}", "http://www.reddit.com/message/compose/?to=#{user.username}"
+            .description
+              .well.well-small
+                :markdown
+                  #{r.rendered_description}
+              %p.timestamp= "posted #{time_ago_in_words(r.created_at)} ago"
+            .metadata.well.well-small
+              %h5 Bounty offered
+              %p= "#{r.bounty}d"
+              - unless r.evidence_links.empty?
+                %h5 Evidence Links
+                %ul
+              - r.evidence_links.each do |link|
+                %li= link_to "Link", link.link_text
+              - if r.civilization_id.present?
+                - civ = Civilization.where(id: r.civilization_id).first
+                %h5 Civilization
+                %p= civ.name
+              - if r.location.present?
+                %h5 Location
+                %p= r.location
+              - if r.x_coord.present? && r.y_coord.present?
+                %h5 Coordinates
+                %p= "(#{r.x_coord}, #{r.y_coord})"
+    - else
+      .span12.perpetrator
+        .row-fluid
+          .span12
+        .row-fluid
+          .span12
+            %h1= "This report against #{@perpetrator.name} has been CLOSED"
+

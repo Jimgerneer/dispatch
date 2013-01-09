@@ -1,0 +1,6 @@
+$ ->
+  $("#redditPost").click (e) ->
+      e.preventDefault()
+      url = $(this).attr("href")
+      $ window.open(url, "Reddit", "status = 1, height = 600, width = 850, resizable = 0" )
+      #$("#modal-body").html "<iframe width=\"1000px\" height=\"500px\" frameborder=\"0\" scrolling=\"yes\" allowtransparency=\"true\" src=\"" + url + "\"></iframe>"

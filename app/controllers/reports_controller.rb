@@ -1,11 +1,20 @@
 class ReportsController < ApplicationController
 
   before_filter :load_scope
-  before_filter :logged_in?, :except => [:index]
+  before_filter :logged_in?, :except => [:index, :show]
 
   def index
     @reports = @scope.active.recent
     @perpetrator = Perpetrator.find params[:perpetrator_id] if params[:perpetrator_id].present?
+    @user = current_user
+    @reddit_url = ::RedditService.case_submit_link(@perpetrator, @user) if params[:perpetrator_id].present?
+  end
+
+  def show
+    @report = Report.find(params["id"])
+    @perpetrator = Perpetrator.find(@report.perpetrator_id)
+    @user = current_user
+    @reddit_url = ::RedditService.report_submit_link(@report, @perpetrator, @user)
   end
 
   def new
@@ -16,8 +25,8 @@ class ReportsController < ApplicationController
   def create
     @report = @scope.new(params[:report].merge(user_id: session[:user_id]))
     if @report.save
-      flash[:notice] = %Q[Your report has been filed <a href="/perpetrators/#{@report.perpetrator_id}/reports">CLick Here</a> to see].html_safe
-      redirect_to '/'
+      flash[:notice] = %Q[Report Filed! To see all Reports <a href="/perpetrators/#{@report.perpetrator_id}/reports">Click Here</a>].html_safe
+      redirect_to "/reports/#{@report.id}"
     else
       flash.now[:error] = @report.errors.full_messages.join(", ")
       render action: "new"
@@ -37,9 +46,6 @@ class ReportsController < ApplicationController
         flash.now[:error] = @report.errors.full_messages.join(", ")
         render :action => :edit
     end
-  end
-
-  def show
   end
 
   def destroy
