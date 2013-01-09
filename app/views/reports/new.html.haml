@@ -9,7 +9,7 @@
           = form.select :perpetrator_id, Perpetrator.find(:all, :order => "name").map { |p| [p.name, p.id] }.unshift(['not listed', nil])
           = form.label :description
           = form.text_area :description, style: "width:500px", size: "50x15", 
-            placeholder: "Description of incident, Markdown Enabled, Post links in form below"
+            placeholder: "Description of incident, Markdown Enabled, Post all links in 'Evidence Links' below"
           = form.label :bounty, "Bounty (Diamonds)"
           = form.text_field :bounty
         .row-fluid
