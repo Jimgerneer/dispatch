@@ -7,7 +7,7 @@ class Report < ActiveRecord::Base
 
   validates :x_coord, :y_coord, :numericality => true, :allow_blank => true
   validates :description, :bounty, presence: true
-  validates :bounty, :numericality => true
+  validates :bounty, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 500 }
 
   markdownize! :description
 
