@@ -6,15 +6,23 @@ class ReportsController < ApplicationController
   def index
     @reports = @scope.active.recent
     @perpetrator = Perpetrator.find params[:perpetrator_id] if params[:perpetrator_id].present?
-    @user = current_user
-    @reddit_url = ::RedditService.case_submit_link(@perpetrator, @user) if params[:perpetrator_id].present?
+    if session[:user_id].present?
+      @user = current_user
+      @reddit_url = ::RedditService.case_submit_link(@perpetrator, @user) if params[:perpetrator_id].present?
+    else
+      @reddit_url = ::RedditService.case_submit_link(@perpetrator) if params[:perpetrator_id].present?
+    end
   end
 
   def show
     @report = Report.find(params["id"])
     @perpetrator = Perpetrator.find(@report.perpetrator_id)
-    @user = current_user
-    @reddit_url = ::RedditService.report_submit_link(@report, @perpetrator, @user)
+    if session[:user_id].present?
+      @user = current_user
+      @reddit_url = ::RedditService.report_submit_link(@report, @perpetrator, @user)
+    else
+      @reddit_url = ::RedditService.report_submit_link(@report, @perpetrator)
+    end
   end
 
   def new

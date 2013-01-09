@@ -2,8 +2,12 @@ require 'cgi'
 
 class RedditService
 
-  def self.case_submit_link(perpetrator, user)
-     title = "#{perpetrator.name} pearled by #{user.username} post claims"
+  def self.case_submit_link(perpetrator, user=nil)
+    if user == nil
+     title = "[Pearled] #{perpetrator.name} pearled, post claims"
+    else
+     title = "[Pearled] #{perpetrator.name} pearled by #{user.username} post claims"
+    end
      text = %Q{
 ##CivBounty Links Below
 
@@ -18,11 +22,19 @@ class RedditService
     url = "http://www.reddit.com/r/Civcraft/submit?title=#{CGI.escape(title)}&text=#{CGI.escape(text)}"
   end
 
-  def self.report_submit_link(report, perpetrator, user)
-    if report.bounty > 0
-      title = "Wanted: #{perpetrator.name}'s pearl for #{report.bounty}d by #{user.username}"
+  def self.report_submit_link(report, perpetrator, user=nil)
+    if user == nil
+      if report.bounty > 0
+        title = "Wanted: #{perpetrator.name}'s pearl for #{report.bounty}d -CivBounty"
+      else
+        title = "Report: #{perpetrator.name} -CivBounty"
+      end
     else
-      title = "Report: Crimes against #{user.username} by #{perpetrator.name}"
+      if report.bounty > 0
+        title = "Wanted: #{perpetrator.name}'s pearl for #{report.bounty}d by #{user.username}"
+      else
+        title = "Report: Crimes against #{user.username} by #{perpetrator.name}"
+      end
     end
      text = %Q{
 ##CivBounty Links Below
