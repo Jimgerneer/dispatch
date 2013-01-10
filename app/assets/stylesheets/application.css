@@ -112,6 +112,10 @@ h2 {
   text-align: right;
 }
 
+.main-timestamp {
+  color: #999;
+}
+
 .update_link {
   font-size: large;
 }
@@ -248,5 +252,12 @@ h2 {
   padding-left: 15px;
 }
 
-.media-body-main h6{
+.unstyled.main {
+  font-weight: bold;
+  margin-top: 10px;
+  margin-left: 5px;
+}
+
+.unstyled.main li{
+  margin-top: 5px;
 }

@@ -3,7 +3,13 @@
     .media.media-main
       %a{class: "pull-left", href: "/perpetrators/#{p.id}/reports"}
         %img{class: "media-object", src: "http://cravatar.tomheinan.com/#{p.name}/100"}
-      .media-body.media-body-main
-        %h4{class: "media-heading"}= p.name
-        %h6= "Current max bounty: #{p.max_bounty}d"
-        %h6= "Number of Reports: #{p.record_count}"
+      .media-body
+        .media-body-main
+          %h4{class: "media-heading"}= p.name
+          %ul.unstyled.main
+            %li Current max bounty: #{p.max_bounty}d
+            %li
+              .span3
+                Number of Reports: #{p.record_count}
+              .span6
+                %p.main-timestamp= "...last reported #{time_ago_in_words(p.created_at)} ago"
