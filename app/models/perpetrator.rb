@@ -10,14 +10,14 @@ class Perpetrator < ActiveRecord::Base
 
   def self.leaderboard
     joins(:reports).
-      select("perpetrators.*, MAX(bounty) as max_bounty, COUNT(reports.id) as record_count").
+      select("perpetrators.*, MAX(reports.created_at) as last_reported_at, MAX(bounty) as max_bounty, COUNT(DISTINCT reports.id) as record_count").
       group("perpetrators.id, perpetrators.name, perpetrators.created_at, perpetrators.updated_at").
       merge(Report.active)
   end
 
   def self.leaderboard_with_evidence
     joins("INNER JOIN reports ON reports.perpetrator_id = perpetrators.id LEFT JOIN evidence_links ON evidence_links.report_id = reports.id").
-      select("perpetrators.*, MAX (bounty) as max_bounty, COUNT (reports.id) as record_count, SUM (CASE when evidence_links.id is NULL THEN 0 ELSE 1 END) AS evidence_count").
+      select("perpetrators.*, MAX(reports.created_at) as last_reported_at, MAX(bounty) as max_bounty, COUNT(DISTINCT reports.id) as record_count, SUM(CASE when evidence_links.id is NULL THEN 0 ELSE 1 END) AS evidence_count").
       group("perpetrators.id, perpetrators.name, perpetrators.created_at, perpetrators.updated_at").
       having("SUM (CASE when evidence_links.id is NULL THEN 0 ELSE 1 END) > 0").
       merge(Report.active)
