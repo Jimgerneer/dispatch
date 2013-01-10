@@ -4,7 +4,9 @@ class MainController < ApplicationController
 
   def index
     @perps = Perpetrator.leaderboard.order("created_at DESC")
+    logger.fatal { ">>>> before" }
     @most_wanted = Perpetrator.leaderboard_with_evidence.sort_by_highest_bounty.first
+    logger.fatal "<<<< after"
     @civs = Civilization.active_list.order("name")
     if params[:order] == 'most_reports'
       @perps = Perpetrator.leaderboard.sort_by_most_reported
@@ -17,9 +19,9 @@ class MainController < ApplicationController
     elsif params[:order] == 'highest_bounty'
       @perps = Perpetrator.leaderboard.sort_by_highest_bounty
     elsif params[:order] == 'most_reports_with_evidence'
-      @perps = Perpetrator.leaderboard_with_evidence.sort_by_most_evidence
+      @perps = Perpetrator.leaderboard_with_evidence.sort_by_most_reported
     elsif params[:order] == 'highest_bounty_with_evidence'
-      @perps = Perpetrator.leaderboard_with_evidence.sort_by_most_evidence
+      @perps = Perpetrator.leaderboard_with_evidence.sort_by_highest_bounty
     end
   end
 end
