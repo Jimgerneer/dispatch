@@ -132,10 +132,12 @@ h2 {
   border-radius: 5px;
   -webkit-border-radius: 5px;
   background-color: grey;
-  color: white;
   padding-left: 25px;
   padding-top: 25px;
   padding-bottom: 25px;
+}
+.form-optional label {
+  color: white;
 }
 
 .form-checkbox {

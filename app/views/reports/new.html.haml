@@ -5,13 +5,12 @@
       = form_for @report do |form|
         .form-required
           = form.label :perpetrator_name, 'Perpetrator'
-          = form.text_field :perpetrator_name, placeholder: "create new or select ---->"
-          = form.select :perpetrator_id, Perpetrator.find(:all, :order => "name").map { |p| [p.name, p.id] }.unshift(['not listed', nil])
+          = form.text_field :perpetrator_name, placeholder: "CaSe SeNsItIvE!!!!", autocomplete: :off, class: "popover_help", data: { title: "Perpetrator Help", content: "If the perpetrator already exists you may TAB complete and/or use the arrow keys to select the perp and hit enter. If not just type in a new one and it will be created.", provide: "typeahead", source: Perpetrator.all.map(&:name).to_json}
           = form.label :description
           = form.text_area :description, style: "width:500px", size: "50x15", 
-            placeholder: "Description of incident, Markdown Enabled, Post all links in 'Evidence Links' below"
-          = form.label :bounty, "Bounty (Diamonds)"
-          = form.text_field :bounty
+            placeholder: "Description of incident, the more details, the better", class: "popover_help", data: {title: "Description Help", content: "This box is markdown enabled. Links are disabled. If you have links, add them in Evidence Links below." }
+          = form.label :bounty, "Bounty"
+          = form.text_field :bounty, class: "popover_help", data: {title: "Bounty Help", content: "Enter amount in diamonds. Even if zero your reports are still useful!"}
         .row-fluid
           .span12
             %h4 Optional Information
@@ -31,8 +30,7 @@
                 .control-label
                   = form.label :civilization_name, 'Your Civilization'
                 .controls
-                  = form.text_field :civilization_name, placeholder: "create new or select ---->"
-                  = form.select :civilization_id, Civilization.find(:all, :order => "name").map { |c| [c.name, c.id] }.unshift(['not listed', nil])
+                  = form.text_field :civilization_name, placeholder: "CaSe SeNsItIvE!!!!", autocomplete: :off, class: "popover_help", data: { title: "Civilization Help", content: "This will autocomplete the same as Perpetrator. This is for your civilization so that leaders/fellow citizens/hunters can track reports by civ.", provide: "typeahead", source: Civilization.all.map(&:name).to_json}
               .control-group
                 .control-label
                   = form.label :location, 'Location of Crime (City, Nearest City or Name of Area)'
