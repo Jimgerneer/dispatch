@@ -3,7 +3,7 @@ class MainController < ApplicationController
   respond_to :html, :js
 
   def index
-    @perps = Perpetrator.leaderboard.order("created_at DESC")
+    @perps = Perpetrator.leaderboard.order("last_reported_at DESC")
     logger.fatal { ">>>> before" }
     @most_wanted = Perpetrator.leaderboard_with_evidence.sort_by_highest_bounty.first
     logger.fatal "<<<< after"

@@ -12,4 +12,4 @@
               .span3
                 Number of Reports: #{p.record_count}
               .span6
-                %p.main-timestamp= "...last reported #{time_ago_in_words(p.created_at)} ago"
+                %p.main-timestamp= "...last reported #{time_ago_in_words(p.last_reported_at)} ago"
