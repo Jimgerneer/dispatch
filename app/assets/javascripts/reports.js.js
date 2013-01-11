@@ -5,6 +5,6 @@ $(function() {
     var url;
     e.preventDefault();
     url = $(this).attr("href");
-    return $(window.open(url, "Reddit", "status = 1, height = 850, width = 850, resizable = 0"));
+    return $(window.open(url, "Reddit", "status = 1, height = 850, width = 900, resizable = 0"));
   });
 });
