@@ -41,7 +41,7 @@
           %ul.dropdown-menu
             - @civs.each do |civ|
               %li.dropdown-submenu
-                %a.dropdown-toggle(data-toggle="dropdown disabled" href="#{root_path(evidence: false, civ: civ.to_param)}")
+                %a.dropdown-toggle(data-toggle="dropdown disabled" data-remote="true" href="#{root_path(evidence: false, civ: civ.to_param)}")
                   = civ.name
                 %b.caret
                 %ul.dropdown-menu
@@ -50,8 +50,8 @@
   .span12
     .span6.offset2.nav.navbar-form.search_nav
       #search-nav
-        = form_tag root_path do
-          = text_field_tag :search, params[:search], autocomplete: :off, data: {provide: "typeahead", source: Perpetrator.leaderboard.map(&:name).to_json}
+        = form_tag root_path, remote: true do
+          = text_field_tag :search, nil, autocomplete: :off, data: {provide: "typeahead", source: Perpetrator.leaderboard.map(&:name).to_json}
           = submit_tag "Search", name: nil
 .row-fluid
   .span12
