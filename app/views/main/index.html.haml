@@ -16,7 +16,6 @@
   .span12
     .span6.offset2.wanted-header
       %h2 Wanted
-
 .row-fluid
   .span12
     #user-nav.span6.offset2.nav.navbar
@@ -47,6 +46,17 @@
                 %b.caret
                 %ul.dropdown-menu
                   %li= link_to 'with Evidence', root_path(evidence: true, civ: civ.to_param), remote: true
+.row-fluid
+  .span12
+    .span6.offset2.nav.navbar-form.search_nav
+      #search-nav
+        = form_tag root_path do
+          = text_field_tag :search, params[:search], autocomplete: :off, data: {provide: "typeahead", source: Perpetrator.leaderboard.map(&:name).to_json}
+          = submit_tag "Search", name: nil
+.row-fluid
+  .span12
+    #search-content
+      = render partial: "main/search_content"
 .row-fluid
   .span12
     #page-content
