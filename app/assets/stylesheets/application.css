@@ -11,6 +11,7 @@
  *= require_self
  *= require_tree .
  */
+
 body {
   padding-top: 125px;
   padding-bottom: 40px;
@@ -179,20 +180,22 @@ h2 {
 }
 
 .most-wanted-header {
-  border-radius: 5px;
-  -webkit-border-radius: 5px;
+  border-top-left-radius: 35px;
+  -webkit-border-top-left-radius: 35px;
   background-color: black;
   color: white;
-  padding-top: 10px;
+  padding-top: 20px;
+  padding-left: 10px;
 }
 
 .media-most-wanted {
-  border-radius: 5px;
-  -webkit-border-radius: 5px;
+  border-bottom-right-radius: 35px;
+  -webkit-border-bottom-right-radius: 35px;
   background-color: white;
   padding-left: 25px;
   padding-top: 25px;
   padding-bottom: 25px;
+  margin-top: -10px !important;
 }
 
 .media-body-most-wanted {
@@ -216,19 +219,19 @@ h2 {
 }
 
 .wanted-header {
-  border-radius: 5px;
-  -webkit-border-radius: 5px;
+  border-top-left-radius: 35px;
+  -webkit-border-top-left-radius: 35px;
   background-color: black;
   color: white;
-  padding-top: 10px;
+  padding-top: 20px;
+  padding-left: 10px;
 }
 
 #user-nav {
-  border-radius: 5px;
-  -webkit-border-radius: 5px;
+  border-bottom-right-radius: 35px;
+  -webkit-border-bottom-right-radius: 35px;
   background-color: white;
   text-size: large;
-  padding-top: 10px;
   padding-bottom: 10px;
 }
 
@@ -264,17 +267,17 @@ h2 {
 }
 
 .search_nav {
-  border-radius: 5px;
-  -webkit-border-radius: 5px;
   background-color: red;
   text-size: large;
-  padding-top: 10px;
+  padding-top: 20px;
   padding-left: 20px;
 }
 
+form.form-search input.search-query {
+  height: auto;
+}
+
 .search_content {
-  border-radius: 5px;
-  -webkit-border-radius: 5px;
   background-color: black;
   text-size: large;
   padding-top: 50px;
