@@ -1,7 +1,5 @@
 class ReportsController < ApplicationController
 
-  require 'pry'
-
   before_filter :load_scope
   before_filter :logged_in_required, :except => [:index, :show]
 
