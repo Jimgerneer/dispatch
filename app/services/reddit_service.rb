@@ -11,7 +11,7 @@ class RedditService
      text = %Q{
 ##CivBounty Links Below
 
-* Case: Click [here](http://www.civbounty.com/reports/#{perpetrator.id}/perpetrators)
+* Case: Click [here](http://www.civbounty.com/perpetrators/#{perpetrator.id}/reports)
 
 ####Additional Comments:
 
@@ -39,8 +39,8 @@ class RedditService
      text = %Q{
 ##CivBounty Links Below
 
-* Report: Click [here](http://www.civbounty.com/reports/#{report.id}) for the report 
-* Case: Click [here](http://www.civbounty.com/reports/#{perpetrator.id}/perpetrators)
+* Report: Click [here](http://www.civbounty.com/reports/#{report.id}) for the report
+* Case: Click [here](http://www.civbounty.com/perpetrators/#{perpetrator.id}/reports)
 
 ####Additional Comments:
 
