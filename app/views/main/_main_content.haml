@@ -1,15 +1,18 @@
-.span6.offset2
+.span12
   - @perps.each do |p|
-    .media.media-main
-      %a{class: "pull-left", href: "/perpetrators/#{p.id}/reports"}
-        %img{class: "media-object", src: "http://cravatar.tomheinan.com/#{p.name}/100"}
-      .media-body
-        .media-body-main
-          %h4{class: "media-heading"}= p.name
-          %ul.unstyled.main
-            %li Current max bounty: #{p.max_bounty}d
-            %li
-              .span3
-                Number of Reports: #{p.record_count}
-              .span6
-                %p.main-timestamp= "...last reported #{time_ago_in_words(p.last_reported_at)} ago"
+    .row-fluid
+      .span3.offset2.content-backbar
+    .row-fluid
+      .span12.media.media-main
+        %a{class: "pull-left", href: "/perpetrators/#{p.id}/reports"}
+          %img{class: "media-object", src: "http://cravatar.tomheinan.com/#{p.name}/100"}
+        .media-body
+          .media-body-main
+            %h4{class: "media-heading"}= p.name
+            %ul.unstyled.main
+              %li Current max bounty: #{p.max_bounty}d
+              %li
+                .span3
+                  Number of Reports: #{p.record_count}
+                .span6
+                  %p.main-timestamp= "...last reported #{time_ago_in_words(p.last_reported_at)} ago"

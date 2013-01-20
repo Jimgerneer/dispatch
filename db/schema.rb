@@ -11,13 +11,24 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121231202618) do
+ActiveRecord::Schema.define(:version => 20130117202104) do
 
   create_table "civilizations", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "claims", :force => true do |t|
+    t.integer  "hunter_id"
+    t.integer  "perpetrator_id"
+    t.text     "description"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "claims", ["hunter_id"], :name => "index_claims_on_hunter_id"
+  add_index "claims", ["perpetrator_id"], :name => "index_claims_on_perpetrator_id"
 
   create_table "evidence_links", :force => true do |t|
     t.integer  "report_id"
@@ -51,6 +62,17 @@ ActiveRecord::Schema.define(:version => 20121231202618) do
 
   add_index "reports", ["civilization_id"], :name => "index_reports_on_civilization_id"
   add_index "reports", ["perpetrator_id"], :name => "index_reports_on_perpetrator_id"
+
+  create_table "rewards", :force => true do |t|
+    t.integer  "claim_id"
+    t.integer  "report_id"
+    t.string   "key"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "rewards", ["claim_id"], :name => "index_rewards_on_claim_id"
+  add_index "rewards", ["report_id"], :name => "index_rewards_on_report_id"
 
   create_table "users", :force => true do |t|
     t.string   "username"

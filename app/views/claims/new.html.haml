@@ -1,0 +1,12 @@
+.row-fluid
+  .span12
+    .span6.offset2.form
+      %h4 "Report #{@perp.name} pearled"
+      = form_for [@perp, @claim] do |form|
+        .form-required
+          = form.label :description, "Describe capture"
+          = form.text_area :description, style: "width:400px", size: "25X15",
+            placeholder: "Details of capture", class: "popover_help", data: {title: "Description Help", content: "This will be seen by report authors when they choose who actually pearled #{@perp.name}" }
+        .row-fluid
+          .span12.form-submit
+            = form.submit "I have #{@perp.name}'s pearl"

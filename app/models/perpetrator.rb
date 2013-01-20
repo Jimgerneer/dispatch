@@ -7,7 +7,7 @@ class Perpetrator < ActiveRecord::Base
   scope :sort_by_most_reported, order("record_count DESC")
   scope :sort_by_most_evidence, order("evidence_count DESC")
   scope :filter_by_civ, lambda {|civ| where(["reports.civilization_id = ?", civ])}
-  scope :sort_by_most_wanted, order(" MAX(bounty) * (COUNT(DISTINCT reports.id)) * (SUM(CASE when evidence_links.id is NULL THEN 0 ELSE 1 END) + 1 ) + (MAX(extract(EPOCH FROM reports.created_at))/1000000) DESC")
+  scope :sort_by_most_wanted, order(" MAX(bounty) * (COUNT(DISTINCT reports.id)) * (SUM(CASE when evidence_links.id is NULL THEN 0 ELSE 1 END) + 1 ) * (MAX(extract(epoch FROM reports.created_at)) / 10000 ) DESC")
 
   def self.leaderboard
     joins(:reports).

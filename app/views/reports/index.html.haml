@@ -14,6 +14,8 @@
                 %li
                   %a(id="redditPost" href=@reddit_url)
                     Post Claims Thread
+                -if current_user.present?
+                  %li= link_to "I have the pearl", new_perpetrator_claim_path(@perpetrator)
         - @reports.each do |r|
           .row-fluid
             .span12.report

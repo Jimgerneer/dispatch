@@ -9,7 +9,15 @@ Dispatch::Application.routes.draw do
 
   get "main/index"
 
-  resources :reports, except: :index
+  resources :reports, except: :index do
+    member do
+      get :select_claim
+    end
+  end
+
+  resources :perpetrators do
+    resources :claims
+  end
 
   resources :perpetrators do
     resources :reports

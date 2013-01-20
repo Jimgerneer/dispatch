@@ -14,6 +14,7 @@ class Report < ActiveRecord::Base
   belongs_to :perpetrator
   belongs_to :civilization
   belongs_to :user
+  has_many   :rewards
 
   has_many :evidence_links, dependent: :destroy
   accepts_nested_attributes_for :evidence_links, :reject_if => lambda { |a| a[:link_text].blank? }, :allow_destroy => true

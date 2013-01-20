@@ -1,7 +1,7 @@
 - if @search_results.present?
   .row-fluid
     .span12
-      .span6.offset2.search_content
+      .search_content
         - p = @search_results
         .media.media-main
           %a{class: "pull-left", href: "/perpetrators/#{p.id}/reports"}

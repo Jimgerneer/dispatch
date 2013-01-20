@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  hunter: 
+  perpetrator: 
+  description: MyText
+
+two:
+  hunter: 
+  perpetrator: 
+  description: MyText

@@ -1,7 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-this_is_me:
-  username: This_Is_Me
+one:
+  claim: 
+  report: 
+  key: MyString
 
-frosted_pickles:
-  username: Frosted_Pickles
+two:
+  claim: 
+  report: 
+  key: MyString

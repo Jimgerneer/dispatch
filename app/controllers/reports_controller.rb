@@ -1,7 +1,9 @@
 class ReportsController < ApplicationController
 
+  require 'pry'
+
   before_filter :load_scope
-  before_filter :logged_in?, :except => [:index, :show]
+  before_filter :logged_in_required, :except => [:index, :show]
 
   def index
     @reports = @scope.active.recent
@@ -56,18 +58,36 @@ class ReportsController < ApplicationController
     end
   end
 
-  def destroy
+  def select_claim
     @report = Report.for_author(current_user.id).find params[:id]
-    @report.close
-    redirect_to "/user/reports"
+    @perp = Perpetrator.find_by_id(@report.perpetrator_id)
+    @claims = Claim.where(perpetrator_id: @perp.id).order('claims DESC')
   end
 
-  def logged_in?
-    if session[:user_id].present?
-      true
+  def destroy
+    @report = Report.for_author(current_user.id).find params[:id]
+    redirect_to select_claim_report_path(@report) and return false if Claim.where(perpetrator_id: @report.perpetrator_id).any? && ! params[:claim_id].present?
+    @report.close and redirect_to "user/reports" and return false if params[:reject] == "true"
+    if params[:claim_id].present?
+      @claim = Claim.find(params[:claim_id])
+      reward = Reward.new(claim: @claim, report: @report)
+      if reward.save
+        flash[:notice] = "Report has been closed and point rewarded"
+        @report.close
+        redirect_to "/"
+      else
+        flash[:error] = "You can't reward that hunter at this time"
+        redirect_to select_claim_report_path(@report)
+      end
     else
-      redirect_to '/sessions/new'
+      @report.close
+      redirect_to "/user/reports"
     end
+  end
+
+  def logged_in_required
+    return true if logged_in?
+    redirect_to '/sessions/new'
   end
 
   def load_scope

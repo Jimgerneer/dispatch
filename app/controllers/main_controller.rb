@@ -3,6 +3,7 @@ class MainController < ApplicationController
   respond_to :html, :js
 
   def index
+    @hunters = User.hunter_leaderboard.sort_by_reward_count if Reward.first.present?
     @perps = Perpetrator.leaderboard.order("last_reported_at DESC")
     @most_wanted = Perpetrator.leaderboard_with_evidence.sort_by_most_wanted.first
     @civs = Civilization.active_list.order("name")
