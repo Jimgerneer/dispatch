@@ -64,5 +64,8 @@ module Dispatch
     config.generators do |g|
       g.template_engine :haml
     end
+
+    require Rails.root.join("config/initializers/canonicalize_host")
+    config.middleware.insert_before ActionDispatch::Static, CanonicalizeHost
   end
 end
