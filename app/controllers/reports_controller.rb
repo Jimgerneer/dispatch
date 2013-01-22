@@ -14,6 +14,11 @@ class ReportsController < ApplicationController
     end
   end
 
+  def user
+    index
+    render action: 'index'
+  end
+
   def show
     @report = Report.find(params["id"])
     @perpetrator = Perpetrator.find(@report.perpetrator_id)
@@ -85,6 +90,7 @@ class ReportsController < ApplicationController
 
   def logged_in_required
     return true if logged_in?
+    session[:return_to] = request.fullpath
     redirect_to '/sessions/new'
   end
 

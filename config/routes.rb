@@ -4,7 +4,7 @@ Dispatch::Application.routes.draw do
   resources :sessions, except: :index
 
   match '/sessions' => 'sessions#create'
-  match '/user/reports' => 'reports#index'
+  match '/user/reports' => 'reports#user'
   match '/sessions/log-out' =>'sessions#delete'
 
   get "main/index"

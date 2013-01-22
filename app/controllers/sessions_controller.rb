@@ -28,7 +28,8 @@ class SessionsController < ApplicationController
       user = User.find_or_create_by_username(username)
       #set current user
       session[:user_id] = user.id
-      redirect_to '/'
+      return_to = session.delete(:return_to) || '/'
+      redirect_to return_to
     else
       flash[:error] = "Failed to Authenticate, is Reddit working?"
     end
