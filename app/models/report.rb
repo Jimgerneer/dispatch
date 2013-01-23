@@ -21,6 +21,7 @@ class Report < ActiveRecord::Base
   validates_associated :evidence_links
 
   scope :active, where(active: true)
+  scope :closed, where(active: false)
   scope :recent, order('created_at DESC')
   scope :for_perp, lambda{|perp_id| where(perpetrator_id: perp_id)}
   scope :for_author, lambda{|user_id| where(user_id: user_id)}

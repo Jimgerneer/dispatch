@@ -15,7 +15,20 @@
                   %a(id="redditPost" href=@reddit_url)
                     Post Claims Thread
                 -if current_user.present?
-                  %li= link_to "I have the pearl", new_perpetrator_claim_path(@perpetrator)
+                  %li= link_to "Claim Capture of #{@perpetrator.name}", new_perpetrator_claim_path(@perpetrator)
+          - if @claims.present?
+            .row-fluid
+              .span12
+            - @claims.each do |c|
+              .row-fluid
+                .span12.claim
+                  .span6
+                    - user = User.where(id: c.hunter_id).first
+                    %h4.claim-header Capture Claim filed by #{user.username}
+                  .description
+                    .well.well-small
+                    %p= c.description
+                    %p.timestamp= "claim created #{time_ago_in_words(c.created_at)} ago"
         - @reports.each do |r|
           .row-fluid
             .span12.report
@@ -47,6 +60,41 @@
                 - if r.x_coord.present? && r.y_coord.present?
                   %h5 Coordinates
                   %p= "(#{r.x_coord}, #{r.y_coord})"
+        - if @closed_reports.present?
+          .row-fluid.closed
+            .span12
+              %h1 CLOSED REPORTS
+          - @closed_reports.each do |r|
+            .row-fluid.closed
+              .span12.report
+                .span6
+                  %h2.id_number= link_to "Report ##{r.created_at.to_i}-#{r.id}", report_path(r.id)
+                .span4.offset2
+                  - user = User.where(id: r.user_id).first
+                  %h4.author_link= link_to "Filed by #{user.username}", "http://www.reddit.com/message/compose/?to=#{user.username}"
+                .description
+                  .well.well-small
+                    :markdown
+                      #{r.rendered_description}
+                  %p.timestamp= "posted #{time_ago_in_words(r.created_at)} ago"
+                .metadata.well.well-small
+                  %h5 Bounty offered
+                  %p= "#{r.bounty}d"
+                  - unless r.evidence_links.empty?
+                    %h5 Evidence Links
+                    %ul
+                  - r.evidence_links.each do |link|
+                    %li= link_to "Link", link.link_text
+                  - if r.civilization_id.present?
+                    - civ = Civilization.where(id: r.civilization_id).first
+                    %h5 Civilization
+                    %p= civ.name
+                  - if r.location.present?
+                    %h5 Location
+                    %p= r.location
+                  - if r.x_coord.present? && r.y_coord.present?
+                    %h5 Coordinates
+                    %p= "(#{r.x_coord}, #{r.y_coord})"
       - else
         - @reports.each do |r|
           .row-fluid

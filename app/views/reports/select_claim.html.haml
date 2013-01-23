@@ -1,37 +1,40 @@
 .row-fluid
-  .span12
-    .span6.offset2
-      %h3= "These people claim they caught #{@perp.name}"
-      %h4 Please only reward a true claim
-.row-fluid
-  .span12
-    .span6.offset2
-      - @claims.each do |claim|
-        - if claim.hunter_id == current_user.id
-          .row-fluid.well
-            %dl.dl-horizontal
-              %dt Bounty Hunter:
-              %dd You
-              %dt Comments:
-              %dd= claim.description
-              %dt Reward Link:
-              %dd Sorry, Can't reward yourself
-              %dt Timestamp:
-              %dd= "posted #{time_ago_in_words(claim.created_at)} ago"
-        - else
-          .row-fluid.well
-            - user = User.find_by_id(claim.hunter_id)
-            %dl.dl-horizontal
-              %dt Bounty Hunter:
-              %dd= user.username
-              %dt Comments:
-              %dd= claim.description
-              %dt Reward #{user.username}:
-              %dd= link_to "Close", report_path(@report, claim_id: claim.id), method: :delete
-              %dt Timestamp:
-              %dd= "posted #{time_ago_in_words(claim.created_at)} ago"
-.row-fluid
-  .span12
-    .span6.offset2
-      .row-fluid.well
-        %h4= link_to "Close without rewards", report_path(@report, reject: 'true'), method: :delete
+  .span6.offset2
+    .row-fluid
+      .span12
+        .select-claim-header
+          %h3= "These people claim they caught #{@perp.name}"
+          %h4 Please only reward the current true claim
+    .row-fluid
+      .span12
+        - @claims.each do |claim|
+          - if claim.hunter_id == current_user.id
+            .row-fluid
+              .well
+                %dl.dl-horizontal
+                  %dt Bounty Hunter:
+                  %dd You
+                  %dt Comments:
+                  %dd= claim.description
+                  %dt Reward Link:
+                  %dd Sorry, can't reward yourself
+                  %dt Timestamp:
+                  %dd= "posted #{time_ago_in_words(claim.created_at)} ago"
+          - else
+            .row-fluid
+              .well
+                - user = User.find_by_id(claim.hunter_id)
+                %dl.dl-horizontal
+                  %dt Bounty Hunter:
+                  %dd= user.username
+                  %dt Comments:
+                  %dd= claim.description
+                  %dt Reward #{user.username}:
+                  %dd= link_to "Close", report_path(@report, claim_id: claim.id), method: :delete
+                  %dt Timestamp:
+                  %dd= "posted #{time_ago_in_words(claim.created_at)} ago"
+    .row-fluid
+      .span12
+        .row-fluid
+          .well
+            %h4= link_to "Close without rewards", report_path(@report, reject: 'true'), method: :delete

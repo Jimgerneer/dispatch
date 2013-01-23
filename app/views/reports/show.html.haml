@@ -1,7 +1,7 @@
 .row-fluid
   .span12
-    - if @report.active == true
-      .span8.offset2.perpetrator
+    .span8.offset2.perpetrator
+      - if @report.active == true
         .row-fluid
           .span12
             %h1= "Report against #{@perpetrator.name}"
@@ -16,9 +16,57 @@
                 %li
                   %a(id="redditPost" href=@reddit_url)
                     Post to Reddit
+        - if @claims.present?
+          .row-fluid
+            .span12
+          - @claims.each do |c|
+            .row-fluid
+              .span12.claim
+                .span6
+                  - user = User.where(id: c.hunter_id).first
+                  %h4 Capture Claim filed by #{user.username}
+                .description
+                  .well.well-small
+                  %p= c.description
+                  %p.timestamp= "claim created #{time_ago_in_words(c.created_at)} ago"
+          .row-fluid
+            - r = @report
+            .span12.report
+              .span6
+                %h2.id_number= "Report ##{r.created_at.to_i}-#{r.id}"
+              .span4.offset2
+                - user = User.where(id: r.user_id).first
+                %h4.author_link= link_to "Filed by #{user.username}", "http://www.reddit.com/message/compose/?to=#{user.username}"
+              .description
+                .well.well-small
+                  :markdown
+                    #{r.rendered_description}
+                %p.timestamp= "posted #{time_ago_in_words(r.created_at)} ago"
+              .metadata.well.well-small
+                %h5 Bounty offered
+                %p= "#{r.bounty}d"
+                - unless r.evidence_links.empty?
+                  %h5 Evidence Links
+                  %ul
+                - r.evidence_links.each do |link|
+                  %li= link_to "Link", link.link_text
+                - if r.civilization_id.present?
+                  - civ = Civilization.where(id: r.civilization_id).first
+                  %h5 Civilization
+                  %p= civ.name
+                - if r.location.present?
+                  %h5 Location
+                  %p= r.location
+                - if r.x_coord.present? && r.y_coord.present?
+                  %h5 Coordinates
+                  %p= "(#{r.x_coord}, #{r.y_coord})"
+      - else
+        .row-fluid.closed
+          .span12
+            %h1 THIS REPORT IS CLOSED
         .row-fluid
           - r = @report
-          .span12.report
+          .span12.report.closed
             .span6
               %h2.id_number= "Report ##{r.created_at.to_i}-#{r.id}"
             .span4.offset2
@@ -47,10 +95,3 @@
               - if r.x_coord.present? && r.y_coord.present?
                 %h5 Coordinates
                 %p= "(#{r.x_coord}, #{r.y_coord})"
-    - else
-      .span12.perpetrator
-        .row-fluid
-          .span12
-        .row-fluid
-          .span12
-            %h1= "This report against #{@perpetrator.name} has been CLOSED"
