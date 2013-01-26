@@ -19,6 +19,7 @@ class Report < ActiveRecord::Base
   has_many :evidence_links, dependent: :destroy
   accepts_nested_attributes_for :evidence_links, :reject_if => lambda { |a| a[:link_text].blank? }, :allow_destroy => true
   validates_associated :evidence_links
+  validates_associated :perpetrator
 
   scope :active, where(active: true)
   scope :closed, where(active: false)

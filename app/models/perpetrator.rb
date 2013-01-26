@@ -1,6 +1,8 @@
 class Perpetrator < ActiveRecord::Base
   attr_accessible :name
 
+  validates_length_of :name, maximum: 16
+
   has_many :reports
 
   scope :sort_by_highest_bounty, order("max_bounty DESC")
