@@ -17,7 +17,7 @@
                 = form.fields_for :evidence_links, link do |link_form|
                   .row-fluid
                     #evidence_field.span3
-                      = link_form.label :link_text, "Evidence Link"
+                      = link_form.label :link_text, "Proof Link"
                       = link_form.text_field :link_text, placeholder: "http://www.imgur.com"
                     .span4.form-checkbox
                       = link_form.check_box :_destroy
