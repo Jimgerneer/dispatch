@@ -22,9 +22,14 @@
           - @claims.each do |c|
             .row-fluid
               .span12.claim
-                .span6
+                .span7
                   - user = User.where(id: c.hunter_id).first
                   %h4 Capture Claim filed by #{user.username}
+                - if c.evidence_links.present?
+                  .span5.claim-nav
+                    %ul.nav.nav-pills
+                      - c.evidence_links.each do |link|
+                        %li= link_to "Proof", link.link_text
                 .description
                   .well.well-small
                   %p= c.description
@@ -44,7 +49,10 @@
               %p.timestamp= "posted #{time_ago_in_words(r.created_at)} ago"
             .metadata.well.well-small
               %h5 Bounty offered
-              %p= "#{r.bounty}d"
+              - if r.bounty == 0
+                %p REPORT ONLY
+              - else
+                %p= "#{r.bounty}d"
               - unless r.evidence_links.empty?
                 %h5 Evidence Links
                 %ul

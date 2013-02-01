@@ -5,6 +5,7 @@ Dispatch::Application.routes.draw do
 
   match '/sessions' => 'sessions#create'
   match '/user/reports' => 'reports#user'
+  match '/user/claims' => 'claims#index'
   match '/sessions/log-out' =>'sessions#delete'
 
   get "main/index"

@@ -3,7 +3,9 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 $ ->
+  window.openRedditWindow = (url) ->
+      $ window.open(url, "Reddit", "status = 1, height = 850, width = 1000, resizable = 0" )
+
   $("#redditPost").click (e) ->
       e.preventDefault()
-      url = $(this).attr("href")
-      $ window.open(url, "Reddit", "status = 1, height = 850, width = 1000, resizable = 0" )
+      openRedditWindow $(this).attr("href")

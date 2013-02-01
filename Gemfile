@@ -32,13 +32,21 @@ group :test do
   gem 'cucumber-rails'
   gem 'database_cleaner'
   gem 'capybara'
+  gem 'capybara-webkit'
   gem 'pry'
   gem 'launchy'
 end
 
 group :development do
+  gem 'guard'
+  gem 'guard-cucumber'
+  gem 'growl'
   gem 'quiet_assets'
   gem 'taps'
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'rb-fsevent', '~> 0.9.1'
+  gem 'launchy'
 end
 
 # To use ActiveModel has_secure_password

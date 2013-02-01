@@ -8,13 +8,9 @@ class ReportsController < ApplicationController
     @closed_reports = @scope.closed.recent
     @claims = Claim.where(perpetrator_id: params[:perpetrator_id])
     @perpetrator = Perpetrator.find params[:perpetrator_id] if params[:perpetrator_id].present?
+    @pearl_claimed_url = ::RedditService.pearl_submit_link(@perpetrator, params[:claim]) if params[:claim].present?
     flash.now[:notice] = "Hunters have claimed they captured #{@perpetrator.name}, see below" if @claims.present? && ! flash.present?
-    if session[:user_id].present?
-      @user = current_user
-      @reddit_url = ::RedditService.case_submit_link(@perpetrator, @user) if params[:perpetrator_id].present?
-    else
-      @reddit_url = ::RedditService.case_submit_link(@perpetrator) if params[:perpetrator_id].present?
-    end
+    @reddit_url = ::RedditService.case_submit_link(@perpetrator) if params[:perpetrator_id].present?
   end
 
   def user
@@ -28,8 +24,7 @@ class ReportsController < ApplicationController
     @claims = Claim.where(perpetrator_id: @perpetrator.id)
     flash.now[:notice] = "Hunters have claimed they captured #{@perpetrator.name}, see below" if @claims.present? && ! flash.present? && @report.active == true
     if session[:user_id].present?
-      @user = current_user
-      @reddit_url = ::RedditService.report_submit_link(@report, @perpetrator, @user)
+      @reddit_url = ::RedditService.report_submit_link(@report, @perpetrator, current_user)
     else
       @reddit_url = ::RedditService.report_submit_link(@report, @perpetrator)
     end
@@ -91,12 +86,6 @@ class ReportsController < ApplicationController
       @report.close
       redirect_to "/user/reports"
     end
-  end
-
-  def logged_in_required
-    return true if logged_in?
-    session[:return_to] = request.fullpath
-    redirect_to '/sessions/new'
   end
 
   def load_scope

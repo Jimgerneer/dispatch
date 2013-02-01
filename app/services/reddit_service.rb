@@ -2,18 +2,35 @@ require 'cgi'
 
 class RedditService
 
-  def self.case_submit_link(perpetrator, user=nil)
-    if user == nil
-     title = "[Pearled] #{perpetrator.name} pearled, post claims"
-    else
-     title = "[Pearled] #{perpetrator.name} pearled by #{user.username} post claims"
-    end
-     text = %Q{
+  def self.pearl_submit_link(perpetrator, claim_id)
+    claim = Claim.find(claim_id)
+    title = "[Pearled] #{perpetrator.name} pearled, post claims"
+    text = %Q!
+##CivBounty Links Below
+
+* Case: Click [here](http://www.civbounty.com/perpetrators/#{perpetrator.id}/reports)
+#{generate_links(claim)}
+
+####Additional Comments:
+
+
+
+
+*Thank you for using [CivBounty](http://www.civbounty.com)*
+     !
+
+    url = "http://www.reddit.com/r/Civcraft/submit?title=#{CGI.escape(title)}&text=#{CGI.escape(text)}"
+  end
+
+  def self.case_submit_link(perpetrator)
+    title = "[Claims] #{perpetrator.name} pearled, post claims"
+    text = %Q{
 ##CivBounty Links Below
 
 * Case: Click [here](http://www.civbounty.com/perpetrators/#{perpetrator.id}/reports)
 
 ####Additional Comments:
+
 
 
 *Thank you for using [CivBounty](http://www.civbounty.com)*
@@ -45,10 +62,15 @@ class RedditService
 ####Additional Comments:
 
 
+
 *Thank you for using [CivBounty](http://www.civbounty.com)*
      }
 
     url = "http://www.reddit.com/r/Civcraft/submit?title=#{CGI.escape(title)}&text=#{CGI.escape(text)}"
+  end
+
+  def self.generate_links(claim)
+    claim.evidence_links.map {|obj| "* Proof: Click [here](#{obj.link_text})"}.join("\n")
   end
 
 =begin

@@ -18,3 +18,7 @@
 $(function() {
   $('.popover_help').popover( {trigger: 'focus'})
 });
+
+window.openRedditWindow = function(url) {
+  return $(window.open(url, "Reddit", "status = 1, height = 850, width = 1000, resizable = 0"));
+};

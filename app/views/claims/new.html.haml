@@ -8,5 +8,20 @@
           = form.text_area :description, style: "width:400px", size: "25X15",
             placeholder: "Details of capture", class: "popover_help", data: {title: "Description Help", content: "This will be seen by report authors when they choose who actually pearled #{@perp.name}" }
         .row-fluid
+          .span12
+            %h4 Optional Information
+        .row-fluid
+          .span12.form-optional
+            .form-hortizontal
+              - @claim.evidence_links.each do |link|
+                = form.fields_for :evidence_links, link do |link_form|
+                  .row-fluid
+                    #evidence_field.span3
+                      = link_form.label :link_text, "Evidence Link"
+                      = link_form.text_field :link_text, placeholder: "http://www.imgur.com"
+                    .span4.form-checkbox
+                      = link_form.check_box :_destroy
+                      = link_form.label :_destroy, "Remove Link"
+        .row-fluid
           .span12.form-submit
             = form.submit "I have #{@perp.name}'s pearl"

@@ -2,9 +2,7 @@
 
 $(function() {
   return $("#redditPost").click(function(e) {
-    var url;
     e.preventDefault();
-    url = $(this).attr("href");
-    return $(window.open(url, "Reddit", "status = 1, height = 850, width = 1000, resizable = 0"));
+    return openRedditWindow($(this).attr("href"));
   });
 });

@@ -55,5 +55,19 @@ end
 # Possible values are :truncation and :transaction
 # The :transaction strategy is faster, but might give you threading problems.
 # See https://github.com/cucumber/cucumber-rails/blob/master/features/choose_javascript_database_strategy.feature
+
+Capybara.register_driver :rack_test do |app|
+    Capybara::RackTest::Driver.new(app, :browser => :chrome)
+end
+
 Cucumber::Rails::Database.javascript_strategy = :truncation
 
+# For bypassing Oauth
+class ApplicationController < ActionController::Base
+
+  prepend_before_filter :stub_current_user
+
+  def stub_current_user
+    session[:user_id] = cookies[:stub_user_id] if cookies[:stub_user_id]
+  end
+end

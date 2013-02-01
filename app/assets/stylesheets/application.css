@@ -137,6 +137,43 @@ body {
   margin-bottom: 0px;
 }
 
+.claim-nav {
+  background-color: red;
+  border-bottom-left-radius: 40px;
+  -webkit-border-bottom-left-radius: 40px;
+  color: white;
+  padding-top: 10px;
+  padding-bottom: 0px;
+  padding-left: 35px;
+  margin-bottom: 20px;
+}
+
+.claim-nav a {
+  color: white;
+}
+
+.claim_pearl_bar {
+  background-color: black;
+}
+
+.claim_pearl_bar h3{
+  color: white;
+  padding-top: 5px;
+}
+
+.claim_pearl_reddit_link {
+  border-radius: 30px;
+  -webkit-border-radius: 30px;
+  padding-left: 30px;
+  padding-top: 20px;
+  background-color: red;
+}
+
+.claim_pearl_reddit_link a {
+  font-size: 30px;
+  color: white;
+}
+
 .select-claim-header h4{
   background-color: red;
   padding-left: 20px;

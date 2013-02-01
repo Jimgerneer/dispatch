@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130117202104) do
+ActiveRecord::Schema.define(:version => 20130131172938) do
 
   create_table "civilizations", :force => true do |t|
     t.string   "name"
@@ -31,13 +31,14 @@ ActiveRecord::Schema.define(:version => 20130117202104) do
   add_index "claims", ["perpetrator_id"], :name => "index_claims_on_perpetrator_id"
 
   create_table "evidence_links", :force => true do |t|
-    t.integer  "report_id"
+    t.integer  "evident_id"
     t.string   "link_text"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.string   "evident_type"
   end
 
-  add_index "evidence_links", ["report_id"], :name => "index_evidence_links_on_report_id"
+  add_index "evidence_links", ["evident_id"], :name => "index_evidence_links_on_report_id"
 
   create_table "perpetrators", :force => true do |t|
     t.string   "name"
