@@ -15,4 +15,8 @@ class Claim < ActiveRecord::Base
   scope :recent, order('created_at DESC')
   scope :for_author, lambda{|user_id| where(hunter_id: user_id)}
 
+  def to_s
+    hunter.try :username
+  end
+
 end

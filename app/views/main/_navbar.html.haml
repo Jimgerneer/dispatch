@@ -25,7 +25,7 @@
                     = link_to 'Log out', controller: 'sessions', action: 'delete'
                     %li{class: "divider-vertical"}
                   %li
-                    = link_to 'Reports', user_reports_path
+                    = link_to 'My Reports', user_reports_path
                   - if Claim.find_by_hunter_id(session[:user_id]).present?
                     %li{class: "divider-vertical"}
                     %li

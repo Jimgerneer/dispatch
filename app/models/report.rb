@@ -32,6 +32,10 @@ class Report < ActiveRecord::Base
     self.save
   end
 
+  def to_s
+    perpetrator.try :name
+  end
+
   private
 
   def create_new_perpetrator

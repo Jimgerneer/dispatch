@@ -17,6 +17,7 @@
 
 $(function() {
   $('.popover_help').popover( {trigger: 'focus'})
+  updateOnlineStatus()
 });
 
 window.openRedditWindow = function(url) {
@@ -33,3 +34,39 @@ window.openRedditWindow = function(url) {
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
 
+window.onlineList = null;
+window.onlineListAge = null;
+
+window.updateOnlineList = function(callback) {
+  $.getJSON('http://whateverorigin.org/get?url=' + encodeURIComponent('http://skynet.nickg.org/online.json') + '&callback=?', function(data){
+      onlineList = data.contents;
+      onlineListAge = new Date();
+      if (typeof (callback) == 'function')
+        callback()
+  });
+};
+
+window.serverPlayerList = function() {
+  $.getJSON('http://whateverorigin.org/get?url=' + encodeURIComponent('http://skynet.nickg.org/players.json') + '&callback=?', function(data){ 
+    var names = data.contents;
+    $('.perpetrator input').data('typeahead').source = names;
+  });
+};
+
+window.updateOnlineStatus = function() {
+  if (onlineListAge == null) {
+    var onlineListAge = new Date();
+  }
+
+  var currentTime = new Date();
+  var dif = currentTime.getTime() - onlineListAge.getTime();
+
+  var secondsFrom = dif / 1000;
+  var secondsBetweenUpdates = Math.abs(secondsFrom);
+
+  if (onlineList == null || secondsBetweenUpdates >= 60) {
+    updateOnlineList(updateOnlineStatus)
+  } else {
+    $.each(onlineList, function(name, timestamp) { $('#perp-'+name).addClass('online') });
+  }
+};

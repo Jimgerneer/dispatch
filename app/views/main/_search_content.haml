@@ -3,11 +3,13 @@
     .span12
       .search_content
         - p = @search_results
-        .media.media-main
+        .media.media-main{id: "perp-#{p.name}" }
           %a{class: "pull-left", href: "/perpetrators/#{p.id}/reports"}
             %img{class: "media-object", src: "http://cravatar.tomheinan.com/#{p.name}/100"}
           .media-body
             .media-body-main
+              .indicator
+                %p Status
               %h4{class: "media-heading"}= p.name
               %ul.unstyled.main
                 %li Current max bounty: #{p.max_bounty}d
