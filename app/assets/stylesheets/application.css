@@ -13,19 +13,19 @@
  */
 .most-wanted-indicator {
   background: red;
-  height: 20px;
+  border-radius:10px;
   -moz-border-radius:10px;
   -webkit-border-radius: 10px;
-  border-radius:10px;
-  width: 40px;
+  color: red;
   float: right;
-  padding-top: 8px;
-  padding-right: 8px;
-  padding-left: 8px;
-  padding-bottom: 8px;
+  height: 20px;
+  width: 40px;
   margin-right: 10px;
   margin-top: 10px;
-  color: red;
+  padding-bottom: 8px;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 8px;
 }
 
 .online .most-wanted-indicator {
@@ -35,19 +35,19 @@
 
 .indicator {
   background: red;
-  height: 20px;
+  border-radius:10px;
   -moz-border-radius:10px;
   -webkit-border-radius: 10px;
-  border-radius:10px;
-  width: 40px;
+  color: white;
   float: right;
-  padding-top: 8px;
-  padding-right: 8px;
-  padding-left: 8px;
-  padding-bottom: 8px;
+  height: 20px;
+  width: 40px;
   margin-right: 10px;
   margin-top: 10px;
-  color: white;
+  padding-bottom: 8px;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 8px;
 }
 
 .online .indicator {
@@ -55,14 +55,14 @@
 }
 
 body {
-  padding-top: 125px;
+  background: url('../nasty_fabric/nasty_fabric.png');
   padding-bottom: 40px;
-  background: url('../nasty_fabric/nasty_fabric.png')
+  padding-top: 125px;
 }
 
 #hunter-content {
-  margin-top: -10px;
   background-color: grey;
+  margin-top: -10px;
 }
 
 #hunter-content thead {
@@ -75,13 +75,13 @@ body {
 }
 
 .claim {
-  background: url('../navy_blue/navy_blue.png');
   background-color: grey;
+  background: url('../navy_blue/navy_blue.png');
   border-radius: 5px;
   -webkit-border-radius: 5px;
-  width: 100%;
   margin-bottom: 20px;
   margin-left: 0px;
+  width: 100%;
 }
 
 .claim h4 {
@@ -89,26 +89,26 @@ body {
 }
 
 .claim .description p {
+  color: white;
   padding-left: 20px;
   padding-right: 20px;
-  color: white;
 }
 
 .report {
-  background: url('../navy_blue/navy_blue.png');
   background-color: grey;
+  background: url('../navy_blue/navy_blue.png');
   border-radius: 5px;
   -webkit-border-radius: 5px;
-  width: 100%;
   margin-bottom: 20px;
   margin-left: 0px;
+  width: 100%;
 }
 
 .report .author_link {
-  text-align: right;
-  padding-top: 45px;
   margin-bottom: 0px;
   margin-right: 15px;
+  padding-top: 45px;
+  text-align: right;
 }
 
 .report h2 {
@@ -121,10 +121,10 @@ body {
 }
 
 .report .perp_name {
-  padding-top: 15px;
-  margin-right: 15px;
-  margin-left: 5px;
   color: white;
+  margin-left: 5px;
+  margin-right: 15px;
+  padding-top: 15px;
 }
 
 .report .description {
@@ -140,12 +140,12 @@ body {
 }
 
 .report .metadata h5 {
+  background-color: grey;
   border-radius: 5px;
   -webkit-border-radius: 5px;
-  background-color: grey;
+  padding-bottom: 5px;
   padding-left: 10px;
   padding-top: 5px;
-  padding-bottom: 5px;
 }
 
 .report .metadata p {
@@ -153,14 +153,14 @@ body {
 }
 
 .report-nav {
+  background-color: black;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
   -webkit-border-top-left-radius: 5px;
   -webkit-border-bottom-left-radius: 5px;
-  background-color: black;
+  margin-top: 55px;
   padding-left: 10px;
   padding-top: 15px;
-  margin-top: 55px;
 }
 
 .report-nav li a{
@@ -169,14 +169,14 @@ body {
 }
 
 .select-claim-header h3{
+  background-color: black;
   border-top-right-radius: 40px;
   -webkit-border-top-right-radius: 40px;
-  background-color: black;
   color: white;
-  padding-top: 15px;
-  padding-left: 25px;
-  padding-bottom: 20px;
   margin-bottom: 0px;
+  padding-bottom: 20px;
+  padding-left: 25px;
+  padding-top: 15px;
 }
 
 .claim-nav {
@@ -184,10 +184,10 @@ body {
   border-bottom-left-radius: 40px;
   -webkit-border-bottom-left-radius: 40px;
   color: white;
-  padding-top: 10px;
+  margin-bottom: 20px;
   padding-bottom: 0px;
   padding-left: 35px;
-  margin-bottom: 20px;
+  padding-top: 10px;
 }
 
 .claim-nav a {
@@ -204,35 +204,35 @@ body {
 }
 
 .claim_pearl_reddit_link {
+  background-color: red;
   border-radius: 30px;
   -webkit-border-radius: 30px;
   padding-left: 30px;
   padding-top: 20px;
-  background-color: red;
 }
 
 .claim_pearl_reddit_link a {
-  font-size: 30px;
   color: white;
+  font-size: 30px;
 }
 
 .select-claim-header h4{
   background-color: red;
-  padding-left: 20px;
-  padding-top: 10px;
-  padding-bottom: 10px;
   color: white;
   margin-top: 0px;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  padding-top: 10px;
 }
 
 .report-header {
-  border-bottom-right-radius: 5px;
-  border-bottom-left-radius: 5px;
-  -webkit-border-bottom-right-radius: 5px;
-  -webkit-border-bottom-left-radius: 5px;
   background-color: white;
-  padding-left: 50px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  -webkit-border-bottom-left-radius: 5px;
+  -webkit-border-bottom-right-radius: 5px;
   padding-bottom: 15px;
+  padding-left: 50px;
   padding-top: 15px;
 }
 
@@ -242,7 +242,7 @@ body {
 
 h2 {
   padding-bottom: 25px;
-  padding-left: 25px
+  padding-left: 25px;
 }
 
 .timestamp {
@@ -259,95 +259,95 @@ h2 {
 }
 
 .form {
+  background-color: white;
   border-radius: 5px;
   -webkit-border-radius: 5px;
-  background-color: white;
 }
 
 .form-required {
+  padding-bottom: 25px;
   padding-left: 25px;
   padding-top: 25px;
-  padding-bottom: 25px;
 }
 
 .form-optional {
+  background-color: grey;
   border-radius: 5px;
   -webkit-border-radius: 5px;
-  background-color: grey;
+  padding-bottom: 25px;
   padding-left: 25px;
   padding-top: 25px;
-  padding-bottom: 25px;
 }
 .form-optional label {
   color: white;
 }
 
 .form-checkbox {
-  padding-top: 20px;
   padding-left: 40px;
+  padding-top: 20px;
 }
 
 .form-submit {
-  padding-top: 20px;
-  padding-bottom: 20px;
-  padding-left: 20px;
   background-color: red;
   border-radius: 5px;
   -webkit-border-radius: 5px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  padding-top: 20px;
 }
 
 .form h4 {
+  background-color: black;
   border-radius: 5px;
   -webkit-border-radius: 5px;
-  background-color: black;
   color: white;
-  padding-top: 15px;
   padding-bottom: 15px;
   padding-left: 25px;
+  padding-top: 15px;
 }
 
 .perpetrator h1 {
+  background-color: red;
   border-top-right-radius: 40px;
   -webkit-border-top-right-radius: 40px;
-  background-color: red;
   color: white;
-  padding-top: 10px;
-  padding-left: 15px;
-  padding-bottom: 10px;
   margin-bottom: 0px;
+  padding-bottom: 10px;
+  padding-left: 15px;
+  padding-top: 10px;
 }
 
 .most-wanted-header {
+  background-color: black;
   border-top-left-radius: 35px;
   -webkit-border-top-left-radius: 35px;
-  background-color: black;
   color: white;
-  padding-top: 20px;
   padding-left: 10px;
+  padding-top: 20px;
 }
 
 .media-most-wanted {
+  background-color: white;
   border-bottom-right-radius: 35px;
   -webkit-border-bottom-right-radius: 35px;
-  background-color: white;
+  margin-top: -10px !important;
+  padding-bottom: 25px;
   padding-left: 25px;
   padding-top: 25px;
-  padding-bottom: 25px;
-  margin-top: -10px !important;
 }
 
 .media-body-most-wanted {
+  background-color: black;
   border-radius: 5px;
   -webkit-border-radius: 5px;
-  background-color: black;
   color: white;
   width: 63%;
 }
 
 .media-body-most-wanted h2 {
+  background-color: red;
   border-radius: 5px;
   -webkit-border-radius: 5px;
-  background-color: red;
   color: white;
   padding-top: 15px;
 }
@@ -357,52 +357,52 @@ h2 {
 }
 
 .wanted-header {
+  background-color: black;
   border-top-left-radius: 35px;
   -webkit-border-top-left-radius: 35px;
-  background-color: black;
   color: white;
-  padding-top: 20px;
   padding-left: 10px;
+  padding-top: 20px;
 }
 
 #user-nav {
+  background-color: white;
   border-bottom-right-radius: 35px;
   -webkit-border-bottom-right-radius: 35px;
-  background-color: white;
-  text-size: large;
-  padding-bottom: 10px;
   margin-bottom: 0px !important;
+  padding-bottom: 10px;
+  text-size: large;
 }
 
 .media-main {
+  background-color: white;
   border-radius: 5px;
+  border-bottom-right-radius: 45px;
   -webkit-border-radius: 5px;
   -webkit-border-bottom-right-radius: 45px;
-  border-bottom-right-radius: 45px;
-  background-color: white;
-  text-size: large;
-  padding-top: 10px;
-  padding-left: 15px;
   padding-bottom: 10px;
+  padding-left: 15px;
+  padding-top: 10px;
+  text-size: large;
 }
 
 .media-body-main h4{
+  background-color: grey;
   border-bottom-left-radius: 5px;
   border-top-left-radius: 5px;
   -webkit-border-bottom-left-radius: 5px;
   -webkit-border-top-left-radius: 5px;
-  background-color: grey;
   color: white;
-  padding-top: 10px;
   padding-bottom: 10px;
   padding-left: 15px;
+  padding-top: 10px;
 }
 
 .unstyled.main {
-  font-weight: bold;
   font-size: 12.4px;
-  margin-top: 10px;
+  font-weight: bold;
   margin-left: 5px;
+  margin-top: 10px;
 }
 
 .unstyled.main li{
@@ -410,11 +410,11 @@ h2 {
 }
 
 .search_nav {
-  margin-top: -10px;
   background-color: red;
-  text-size: large;
-  padding-top: 20px;
+  margin-top: -10px;
   padding-left: 20px;
+  padding-top: 20px;
+  text-size: large;
 }
 
 form.form-search input.search-query {
@@ -423,11 +423,11 @@ form.form-search input.search-query {
 
 .search_content {
   background-color: black;
-  text-size: large;
-  padding-top: 40px;
   padding-bottom: 40px;
   padding-left: 15px;
   padding-right: 15px;
+  padding-top: 40px;
+  text-size: large;
 }
 
 .content-backbar {

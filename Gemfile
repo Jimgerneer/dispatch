@@ -5,20 +5,20 @@ gem 'rails', '3.2.11'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'pg'
-gem 'oauth2'
+gem 'activeadmin'
 gem 'faraday'
 gem 'faraday_middleware'
-gem 'thin'
 gem 'haml-rails'
 gem 'markdownizer'
-gem 'activeadmin'
+gem 'oauth2'
+gem 'pg'
+gem 'thin'
 
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
+  gem 'sass-rails',   '~> 3.2.3'
   gem 'twitter-bootstrap-rails'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
@@ -30,24 +30,24 @@ end
 gem 'jquery-rails'
 
 group :test do
-  gem 'cucumber-rails'
-  gem 'database_cleaner'
   gem 'capybara'
   gem 'capybara-webkit'
-  gem 'pry'
+  gem 'cucumber-rails'
+  gem 'database_cleaner'
   gem 'launchy'
+  gem 'pry'
 end
 
 group :development do
-  gem 'guard'
-  gem 'guard-cucumber'
-  gem 'growl'
-  gem 'quiet_assets'
-  gem 'taps'
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'rb-fsevent', '~> 0.9.1'
+  gem 'growl'
+  gem 'guard'
+  gem 'guard-cucumber'
   gem 'launchy'
+  gem 'quiet_assets'
+  gem 'rb-fsevent', '~> 0.9.1'
+  gem 'taps'
 end
 
 # To use ActiveModel has_secure_password

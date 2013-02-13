@@ -46,10 +46,27 @@ window.updateOnlineList = function(callback) {
   });
 };
 
+//unique for arrays
+function unique(arr) {
+  var hash = {}, result = [];
+  for ( var i = 0, l = arr.length; i < l; ++i ) {
+    if ( !hash.hasOwnProperty(arr[i]) ) {
+      hash[ arr[i] ] = true;
+      result.push(arr[i]);
+      }
+    }
+  return result;
+}
+
 window.serverPlayerList = function() {
   $.getJSON('http://whateverorigin.org/get?url=' + encodeURIComponent('http://skynet.nickg.org/players.json') + '&callback=?', function(data){ 
+    var backup = $('.perpetrator_field input').data('source');
     var names = data.contents;
-    $('.perpetrator input').data('typeahead').source = names;
+    if (names.length > 0) {
+      var combined = backup.concat(names)
+      var checkedList = unique(combined)
+      $('.perpetrator_field input').data('source', checkedList);
+    }
   });
 };
 
@@ -67,6 +84,10 @@ window.updateOnlineStatus = function() {
   if (onlineList == null || secondsBetweenUpdates >= 60) {
     updateOnlineList(updateOnlineStatus)
   } else {
-    $.each(onlineList, function(name, timestamp) { $('#perp-'+name).addClass('online') });
+    $.each(onlineList, function(name, timestamp) { $('#wanted-'+name).addClass('online') });
+    $.each(onlineList, function(name, timestamp) { 
+      $('#perp-'+name).addClass('online');
+      //$('p', '.online').html().replace("Status", "Online");
+   });
   }
 };

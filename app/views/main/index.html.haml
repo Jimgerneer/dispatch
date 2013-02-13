@@ -5,7 +5,7 @@
         .span12
           .most-wanted-header
             %h2 Most Wanted
-          .media.media-most-wanted
+          .media.media-most-wanted{id: "wanted-#{@most_wanted.name}" }
             %a{class: "pull-left", href: "/perpetrators/#{@most_wanted.id}/reports"}
               %img{class: "media-object", src: "http://cravatar.tomheinan.com/#{@most_wanted.name}/200"}
             .media-body.media-body-most-wanted

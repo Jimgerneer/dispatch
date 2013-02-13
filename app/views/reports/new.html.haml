@@ -4,7 +4,7 @@
       %h4 Required Information
       = form_for @report do |form|
         .form-required
-          .perpetrator
+          .perpetrator_field
             = form.label :perpetrator_name, 'Perpetrator'
             = form.text_field :perpetrator_name, placeholder: "CaSe SeNsItIvE!!!!", autocomplete: :off, class: "popover_help", data: { title: "Perpetrator Help", content: "If the perpetrator already exists you may TAB complete and/or use the arrow keys to select the perp and hit enter. If not just type in a new one and it will be created.", provide: "typeahead", source: Perpetrator.all.map(&:name).to_json}
           = form.label :description
@@ -56,7 +56,5 @@
           .span12.form-submit
             = form.submit 'File Report'
 :javascript
-  window.onload = function() {
-      serverPlayerList();
-      }
+  $(function(){ serverPlayerList() });
 
