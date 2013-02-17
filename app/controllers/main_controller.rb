@@ -8,7 +8,7 @@ class MainController < ApplicationController
     @most_wanted = Perpetrator.leaderboard_with_evidence.sort_by_most_wanted.first
     @civs = Civilization.active_list.order("name")
     @search_results = Perpetrator.leaderboard.find_by_name(params[:search]) if params[:search].present?
-    @report_check = Report.claim_check.active.for_author(current_user)
+    @report_check = Report.claim_check.for_author(current_user).active
     if params[:order] == 'most_reports'
       @perps = Perpetrator.leaderboard.sort_by_most_reported
     elsif params[:civ].present?
