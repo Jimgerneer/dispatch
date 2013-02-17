@@ -13,8 +13,9 @@ class Claim < ActiveRecord::Base
 
   scope :recent, order('created_at DESC')
   scope :for_author, lambda{|user_id| where(hunter_id: user_id)}
-  scope :unexpired, where("created_at > NOW() - INTERVAL '5 DAY' ")
-  scope :expired, where("created_at < NOW() - INTERVAL '5 DAY' ")
+  scope :for_perp, lambda{|perp_id| where(perpetrator_id: perp_id)}
+  scope :unexpired, where("claims.created_at > NOW() - INTERVAL '5 DAY' ")
+  scope :expired, where("claims.created_at < NOW() - INTERVAL '5 DAY' ")
 
   def to_s
     hunter.try :username

@@ -27,6 +27,13 @@ class Report < ActiveRecord::Base
   scope :for_perp, lambda{|perp_id| where(perpetrator_id: perp_id)}
   scope :for_author, lambda{|user_id| where(user_id: user_id)}
 
+  def self.claim_check
+    joins("INNER JOIN claims ON claims.perpetrator_id = claims.perpetrator_id").
+      select("reports.*").
+      group("reports.id, reports.description, reports.created_at, reports.updated_at").
+      merge(Claim.unexpired)
+  end
+
   def close
     self.active = false
     self.save

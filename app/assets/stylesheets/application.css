@@ -94,6 +94,38 @@ body {
   padding-right: 20px;
 }
 
+.capture_announcement {
+  background-color: red;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.capture_announcement h4 {
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  background-color: black;
+  padding-left: 20px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  color: white;
+}
+
+.capture_nav {
+  padding-top: 20px;
+}
+
+.capture_nav li a {
+  padding-left: 30px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-size: 30px;
+  color: black;
+}
+
 .report {
   background-color: grey;
   background: url('../navy_blue/navy_blue.png');

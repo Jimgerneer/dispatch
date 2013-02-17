@@ -1,7 +1,12 @@
 .row-fluid
   -if @report_check.present?
-    .row-fluid.span6.offset1
-      %h4 HEYO
+    .row-fluid.span10.offset1.capture_announcement
+      %h4 Good News! Looks like someone got:
+      %ul.nav.navbar.capture_nav
+        - @report_check.each do |check|
+          %li= link_to check, report_path(check)
+      %h4 Go to 'My Reports' to close and reward the hunter ASAP!
+    .row-fluid.span10.offset1
 .row-fluid
   .row-fluid.span6.offset1
     -if @most_wanted.present?
