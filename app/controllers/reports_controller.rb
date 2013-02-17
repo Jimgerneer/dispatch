@@ -6,12 +6,14 @@ class ReportsController < ApplicationController
   def index
     @reports = @scope.active.recent
     @closed_reports = @scope.closed.recent
-    @claims = Claim.where(perpetrator_id: params[:perpetrator_id])
+    @claims = Claim.where(perpetrator_id: params[:perpetrator_id]).unexpired
+    @expired_claims = Claim.where(perpetrator_id: params[:perpetrator_id]).expired
     @perpetrator = Perpetrator.find params[:perpetrator_id] if params[:perpetrator_id].present?
     @pearl_claimed_url = ::RedditService.pearl_submit_link(@perpetrator, params[:claim]) if params[:claim].present?
     flash.now[:notice] = "Hunters have claimed they captured #{@perpetrator.name}, see below" if @claims.present? && ! flash.present?
     @reddit_url = ::RedditService.case_submit_link(@perpetrator) if params[:perpetrator_id].present?
   end
+
 
   def user
     index
@@ -21,7 +23,7 @@ class ReportsController < ApplicationController
   def show
     @report = Report.find(params["id"])
     @perpetrator = Perpetrator.find(@report.perpetrator_id)
-    @claims = Claim.where(perpetrator_id: @perpetrator.id)
+    @claims = Claim.where(perpetrator_id: @perpetrator.id).unexpired
     flash.now[:notice] = "Hunters have claimed they captured #{@perpetrator.name}, see below" if @claims.present? && ! flash.present? && @report.active == true
     if session[:user_id].present?
       @reddit_url = ::RedditService.report_submit_link(@report, @perpetrator, current_user)
@@ -64,12 +66,12 @@ class ReportsController < ApplicationController
   def select_claim
     @report = Report.for_author(current_user.id).find params[:id]
     @perp = Perpetrator.find_by_id(@report.perpetrator_id)
-    @claims = Claim.where(perpetrator_id: @perp.id).order('claims DESC')
+    @claims = Claim.where(perpetrator_id: @perp.id).order('claims DESC').unexpired
   end
 
   def destroy
     @report = Report.for_author(current_user.id).find params[:id]
-    redirect_to select_claim_report_path(@report) and return false if Claim.where(perpetrator_id: @report.perpetrator_id).any? && ! params[:claim_id].present?
+    redirect_to select_claim_report_path(@report) and return false if Claim.where(perpetrator_id: @report.perpetrator_id).unexpired.any? && ! params[:claim_id].present?
     @report.close and redirect_to "user/reports" and return false if params[:reject] == "true"
     if params[:claim_id].present?
       @claim = Claim.find(params[:claim_id])

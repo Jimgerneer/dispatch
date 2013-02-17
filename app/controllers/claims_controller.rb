@@ -4,7 +4,8 @@ class ClaimsController < ApplicationController
   before_filter :logged_in_required
 
   def index
-    @claims = @scope.recent
+    @claims = @scope.recent.unexpired
+    @expired_claims = @scope.recent.expired
   end
 
   def new

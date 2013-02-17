@@ -10,10 +10,11 @@ class Claim < ActiveRecord::Base
   validates_associated :evidence_links
 
   validates :description, presence: true
-  validates_uniqueness_of :hunter_id, scope: [:perpetrator_id]
 
   scope :recent, order('created_at DESC')
   scope :for_author, lambda{|user_id| where(hunter_id: user_id)}
+  scope :unexpired, where("created_at > NOW() - INTERVAL '5 DAY' ")
+  scope :expired, where("created_at < NOW() - INTERVAL '5 DAY' ")
 
   def to_s
     hunter.try :username

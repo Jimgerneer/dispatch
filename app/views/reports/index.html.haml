@@ -7,7 +7,7 @@
             %a(id="redditPost" href=@pearl_claimed_url)
               POST TO REDDIT
       .span8
-        %h3 Gratz! Remember, each closed report is a potential point!
+        %h3 Gratz! Your claim will expire in 5 days, get people to close reports ASAP!
 .row-fluid
   .span12
     .span8.offset2.perpetrator
@@ -78,6 +78,25 @@
                 - if r.x_coord.present? && r.y_coord.present?
                   %h5 Coordinates
                   %p= "(#{r.x_coord}, #{r.y_coord})"
+        - if @expired_claims.present?
+          .row-fluid.expired
+            .span12
+              %h1 EXPIRED CAPTURE CLAIMS
+          - @expired_claims.each do |c|
+            .row-fluid.expired
+              .span12.claim
+                .span7
+                  - user = User.where(id: c.hunter_id).first
+                  %h4.claim-header Capture Claim filed by #{user.username}
+                - if c.evidence_links.present?
+                  .span5.claim-nav
+                    %ul.nav.nav-pills
+                      - c.evidence_links.each do |link|
+                        %li= link_to "Proof", link.link_text
+                .description
+                  .well.well-small
+                  %p= c.description
+                  %p.timestamp= "claim created #{time_ago_in_words(c.created_at)} ago"
         - if @closed_reports.present?
           .row-fluid.closed
             .span12

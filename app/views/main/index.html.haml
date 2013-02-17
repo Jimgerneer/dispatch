@@ -1,4 +1,8 @@
 .row-fluid
+  -if @report_check.present?
+    .row-fluid.span6.offset1
+      %h4 HEYO
+.row-fluid
   .row-fluid.span6.offset1
     -if @most_wanted.present?
       .row-fluid
