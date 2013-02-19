@@ -4,7 +4,7 @@ class MainController < ApplicationController
 
   def index
     @hunters = User.hunter_leaderboard.sort_by_reward_count if Reward.first.present?
-    @perps = Perpetrator.leaderboard.order("last_reported_at DESC")
+    @perps = Perpetrator.leaderboard.order("last_reported_at DESC").page(params[:page]).per_page(10)
     @most_wanted = Perpetrator.leaderboard_with_evidence.sort_by_most_wanted.first
     @civs = Civilization.active_list.order("name")
     @search_results = Perpetrator.leaderboard.find_by_name(params[:search]) if params[:search].present?

@@ -13,6 +13,7 @@ gem 'markdownizer'
 gem 'oauth2'
 gem 'pg'
 gem 'thin'
+gem 'will_paginate'
 
 # Gems used only for assets and not required
 # in production environments by default.
