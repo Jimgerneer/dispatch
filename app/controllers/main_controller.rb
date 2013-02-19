@@ -24,5 +24,9 @@ class MainController < ApplicationController
     elsif params[:order] == 'highest_bounty_with_evidence'
       @perps = Perpetrator.leaderboard_with_evidence.sort_by_highest_bounty
     end
+
+    if request.xhr? && params[:page].present?
+      render action: :add_page and return
+    end
   end
 end

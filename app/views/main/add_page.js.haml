@@ -1,0 +1,7 @@
+$('#perpetrator_list').append("#{escape_javascript render partial: "perpetrator", collection: @perps}")
+- if @perps.next_page
+  $('.pagination').replaceWith("#{escape_javascript will_paginate(@perps)}")
+- else
+  $('.pagination').remove()
+updateOnlineStatus()
+// need to add a proccessed data attr to keep track of online statuses that were already gone through
