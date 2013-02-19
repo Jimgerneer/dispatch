@@ -20,5 +20,7 @@ jQuery ->
     console.log "scrollTop:#{st}; Threshold:#{threshold}; url:#{url}, windowHieght:#{windowHeight}"
     if url && st + windowHeight > threshold
       console.log('=======Scrolled=======')
+      $('.pagination').text("Loading more perps...")
+      $.getScript(url)
   $(window).scroll handleScroll
   handleScroll()

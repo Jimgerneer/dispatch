@@ -1,0 +1,18 @@
+.row-fluid
+  .span3.offset2.content-backbar
+.row-fluid
+  .span12.media.media-main{id: "perp-#{perpetrator.name}" }
+    %a{class: "pull-left", href: "/perpetrators/#{perpetrator.id}/reports"}
+      %img{class: "media-object", src: "http://cravatar.tomheinan.com/#{perpetrator.name}/100"}
+    .media-body
+      .media-body-main
+        .indicator
+          %p Status
+        %h4{class: "media-heading"}= perpetrator.name
+        %ul.unstyled.main
+          %li Current max bounty: #{perpetrator.max_bounty}d
+          %li
+            .span3
+              Number of Reports: #{perpetrator.record_count}
+            .span6
+              %p.main-timestamp= "...last reported #{time_ago_in_words(perpetrator.last_reported_at)} ago"
