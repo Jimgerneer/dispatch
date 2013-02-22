@@ -1,3 +1,5 @@
 $("#page-content").html("#{escape_javascript render partial: "main/main_content" }");
+$('#page-content').append("#{escape_javascript will_paginate(@perps)}")
 $("#search-content").html("#{escape_javascript render partial: "main/search_content" }").hide().slideDown(900);
 updateOnlineStatus()
+
