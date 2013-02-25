@@ -12,8 +12,7 @@ class VerificationsController < ApplicationController
     if @verifier.authentic? && @user.save
       session[:user_id] = @user.id
       flash[:success] = 'You are signed in and verified. IMMEDIATELY change your skin again, Thank you'
-      return_to = session.delete(:return_to) || '/'
-      redirect_to return_to
+      redirect_to '/'
     else
       flash[:error] = @verifier.error
       render :edit
