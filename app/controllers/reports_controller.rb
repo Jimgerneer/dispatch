@@ -68,8 +68,7 @@ class ReportsController < ApplicationController
 
   def activate
     @report = Report.find params[:report_id]
-    new_desc = @report.description + " "
-    @report.update_attributes(description: new_desc)
+    @report.touch
     redirect_to "/user/reports"
   end
 
