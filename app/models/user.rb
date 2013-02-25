@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  attr_accessible :username
+  attr_accessible :username, :minecraft_name
 
   has_many :reports
   has_many :claims

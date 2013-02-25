@@ -8,10 +8,17 @@ class ApplicationController < ActionController::Base
     redirect_to '/sessions/new'
   end
 
+  def verification_required
+    return true if @current_user.minecraft_name.present?
+    session[:return_to] = request.fullpath
+    redirect_to '/sessions/new'
+  end
+
   private
 
   def current_user
     @current_user ||= User.find_by_id(session[:user_id])
   end
+
   alias_method :logged_in?, :current_user
 end

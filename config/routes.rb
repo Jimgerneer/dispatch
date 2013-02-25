@@ -6,6 +6,7 @@ Dispatch::Application.routes.draw do
   get "reports/new"
 
   resources :sessions, except: :index
+  resources :verifications
 
   match '/sessions' => 'sessions#create'
   match '/user/reports' => 'reports#user'

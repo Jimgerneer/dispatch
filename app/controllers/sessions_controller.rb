@@ -27,9 +27,13 @@ class SessionsController < ApplicationController
       #find_or_create_by_username
       user = User.find_or_create_by_username(username)
       #set current user
-      session[:user_id] = user.id
-      return_to = session.delete(:return_to) || '/'
-      redirect_to return_to
+      if user.minecraft_name.nil?
+        redirect_to edit_verification_path(user)
+      else
+        session[:user_id] = user.id
+        return_to = session.delete(:return_to) || '/'
+        redirect_to return_to
+      end
     else
       flash[:error] = "Failed to Authenticate, is Reddit working?"
     end

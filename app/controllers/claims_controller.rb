@@ -2,6 +2,7 @@ class ClaimsController < ApplicationController
 
   before_filter :load_scope
   before_filter :logged_in_required
+  before_filter :verification_required
 
   def index
     @claims = @scope.recent.unexpired

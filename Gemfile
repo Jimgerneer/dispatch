@@ -6,6 +6,7 @@ gem 'rails', '3.2.11'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'activeadmin'
+gem 'chunky_png'
 gem 'faraday'
 gem 'faraday_middleware'
 gem 'haml-rails'

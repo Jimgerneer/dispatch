@@ -2,6 +2,7 @@ class ReportsController < ApplicationController
 
   before_filter :load_scope
   before_filter :logged_in_required, :except => [:index, :show]
+  before_filter :verification_required, :except => [:index, :show]
 
   def index
     @reports = @scope.active.recent

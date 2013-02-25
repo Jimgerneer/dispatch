@@ -1,0 +1,16 @@
+.row-fluid.span12
+  .span6.offset2.form
+    %h4 Verify Minecraft Account
+    %p This is now required to post reports. You only have to do this once. Thank You!
+    %ol
+      #verification_link
+        %li
+          %p Download the #{link_to 'verification skin', '/verification_skin.png'} (right click, save as)
+      #verification_link
+        %li
+          %p Upload the skin to your #{link_to 'Minecraft Profile', 'http://www.minecraft.net/profile'}
+      %li
+        = form_for(@user, url: verification_path(@user))do |form|
+          = form.label :minecraft_name, 'Minecraft username'
+          = form.text_field :minecraft_name, class: "popover_help", placeholder: "CaSe SeNsItIvE!", data: {title: "Minecraft Username", content: "This is case sensitive!"}
+          = form.submit "Verify", class: 'btn btn-primary'

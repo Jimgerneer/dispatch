@@ -24,8 +24,7 @@
                 %li
                   %a(id="redditPost" href=@reddit_url)
                     Post Claims Thread
-                -if current_user.present?
-                  %li= link_to "Claim Capture of #{@perpetrator.name}", new_perpetrator_claim_path(@perpetrator)
+                %li= link_to "Claim Capture of #{@perpetrator.name}", new_perpetrator_claim_path(@perpetrator)
           - if @claims.present?
             .row-fluid
               .span12
