@@ -1,5 +1,6 @@
 class VerificationsController < ApplicationController
   def edit
+    flash[:error] = "This is now required to post reports. You only have to do this once. Thank You!"
     @user = User.find params[:id]
   end
 

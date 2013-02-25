@@ -19,7 +19,7 @@ class Perpetrator < ActiveRecord::Base
     joins(:reports).
       select("perpetrators.*, MAX(reports.created_at) as last_reported_at, MAX(bounty) as max_bounty, COUNT(DISTINCT reports.id) as record_count").
       group("perpetrators.id, perpetrators.name, perpetrators.created_at, perpetrators.updated_at").
-      merge(Report.active)
+      merge(Report.active.unexpired)
   end
 
   def self.leaderboard_with_evidence
@@ -27,7 +27,7 @@ class Perpetrator < ActiveRecord::Base
       select("perpetrators.*, MAX(reports.created_at) as last_reported_at, MAX(bounty) as max_bounty, COUNT(DISTINCT reports.id) as record_count, SUM(COALESCE(evidence_links.evidence_count,0)) AS evidence_count").
       group("perpetrators.id, perpetrators.name, perpetrators.created_at, perpetrators.updated_at").
       having("SUM (COALESCE(evidence_links.evidence_count,0)) > 0").
-      merge(Report.active)
+      merge(Report.active.unexpired)
   end
 
   def to_s

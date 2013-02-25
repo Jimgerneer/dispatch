@@ -27,6 +27,8 @@ class Report < ActiveRecord::Base
   scope :for_perp, lambda{|perp_id| where(perpetrator_id: perp_id)}
   scope :for_author, lambda{|user_id| where(user_id: user_id)}
   scope :claim_check, joins("INNER JOIN claims ON claims.perpetrator_id = reports.perpetrator_id").merge(Claim.unexpired)
+  scope :unexpired, where("reports.updated_at > NOW() - INTERVAL '14 DAY' ")
+  scope :expired, where("reports.updated_at < NOW() - INTERVAL '14 DAY' ")
 
   def close
     self.active = false

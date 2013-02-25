@@ -5,7 +5,8 @@ class ReportsController < ApplicationController
   before_filter :verification_required, :except => [:index, :show]
 
   def index
-    @reports = @scope.active.recent
+    @reports = @scope.active.recent.unexpired
+    @expired_reports = @scope.active.recent.expired
     @closed_reports = @scope.closed.recent
     @claims = Claim.for_perp(params[:perpetrator_id]).unexpired
     @expired_claims = Claim.for_perp(params[:perpetrator_id]).expired
@@ -22,6 +23,7 @@ class ReportsController < ApplicationController
   end
 
   def show
+    @expired_report = Report.expired.find(params[:id]) rescue nil
     @report = Report.find(params["id"])
     @perpetrator = Perpetrator.find(@report.perpetrator_id)
     @claims = Claim.for_perp(@perpetrator.id).unexpired
@@ -62,6 +64,13 @@ class ReportsController < ApplicationController
         flash.now[:error] = @report.errors.full_messages.join(", ")
         render :action => :edit
     end
+  end
+
+  def activate
+    @report = Report.find params[:report_id]
+    new_desc = @report.description + " "
+    @report.update_attributes(description: new_desc)
+    redirect_to "/user/reports"
   end
 
   def select_claim

@@ -16,6 +16,7 @@ Dispatch::Application.routes.draw do
   get "main/index"
 
   resources :reports, except: :index do
+    match '/activate' => 'reports#activate'
     member do
       get :select_claim
     end
