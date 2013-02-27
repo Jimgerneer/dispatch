@@ -4,10 +4,7 @@
     %ol
       #verification_link
         %li
-          %p Download the #{link_to 'verification skin', '/verification_skin.png'} (right click, save as)
-      #verification_link
-        %li
-          %p Upload the skin to your #{link_to 'Minecraft Profile', 'http://www.minecraft.net/profile'}
+          %p #{link_to 'Click Here', 'https://minecraft.net/profile/skin/remote?url=http://www.civbounty.com/verification_skin.png'} to upload the verification skin
       %li
         = form_for(@user, url: verification_path(@user))do |form|
           = form.label :minecraft_name, 'Minecraft username'
