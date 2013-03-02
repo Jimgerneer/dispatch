@@ -4,6 +4,9 @@
     %ol
       #verification_link
         %li
+          %p Save your current skin #{link_to 'here', 'http://www.mcskinsearch.com/'}
+      #verification_link
+        %li
           %p #{link_to 'Click Here', 'https://minecraft.net/profile/skin/remote?url=http://www.civbounty.com/verification_skin.png'} to upload the verification skin
       %li
         = form_for(@user, url: verification_path(@user))do |form|
