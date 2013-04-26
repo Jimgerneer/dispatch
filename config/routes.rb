@@ -15,6 +15,20 @@ Dispatch::Application.routes.draw do
 
   get "main/index"
 
+  namespace :api do
+    resources :reports, only: [:index, :show] do
+      collection do
+        get 'active', :to => 'reports#active'
+      end
+    end
+    resources :perpetrators, only: [:index, :show] do
+      collection do
+        get 'active', :to => 'perpetrators#active'
+      end
+    end
+    resources :hunters, only: [:index, :show]
+  end
+
   resources :reports, except: :index do
     match '/activate' => 'reports#activate'
     member do

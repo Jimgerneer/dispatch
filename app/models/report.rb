@@ -29,6 +29,7 @@ class Report < ActiveRecord::Base
   scope :claim_check, joins("INNER JOIN claims ON claims.perpetrator_id = reports.perpetrator_id").merge(Claim.unexpired)
   scope :unexpired, where("reports.updated_at > NOW() - INTERVAL '14 DAY' ")
   scope :expired, where("reports.updated_at < NOW() - INTERVAL '14 DAY' ")
+  scope :in_date_range, lambda{|range| where(["created_at BETWEEN :start AND :end", start: range.first, end: range.last])}
 
   def close
     self.active = false
