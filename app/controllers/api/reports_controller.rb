@@ -1,7 +1,9 @@
 class Api::ReportsController < ApplicationController
   respond_to :json
   def index
-    @reports = Report.all
+    @active_reports = Report.unexpired.active
+    @expired_reports = Report.expired.active
+    @closed_reports = Report.expired.closed
     render template: 'api/reports/index.json.jbuilder'
   end
 
