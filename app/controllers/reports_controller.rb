@@ -60,7 +60,9 @@ class ReportsController < ApplicationController
 
   def update
     @report = Report.for_author(current_user.id).find params[:id]
-      if @report.update_attributes params[:report]
+    report_params = params[:report]
+    report_params[:description].gsub!(/</,"&lt;")
+      if @report.update_attributes report_params
         redirect_to "/user/reports"
       else
         flash.now[:error] = @report.errors.full_messages.join(", ")
