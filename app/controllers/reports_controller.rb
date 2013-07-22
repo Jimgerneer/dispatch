@@ -41,7 +41,9 @@ class ReportsController < ApplicationController
   end
 
   def create
-    @report = @scope.new(params[:report].merge(user_id: session[:user_id]))
+    report_params = params[:report].merge(user_id: session[:user_id])
+    report_params[:description].gsub!(/</,"&lt;")
+    @report = @scope.new(report_params)
     if @report.save
       flash[:notice] = %Q[Report Filed! To see all Reports <a href="/perpetrators/#{@report.perpetrator_id}/reports">Click Here</a>].html_safe
       redirect_to "/reports/#{@report.id}"
