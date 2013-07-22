@@ -16,7 +16,9 @@ class ClaimsController < ApplicationController
   end
 
   def create
-    @claim = Claim.new(params[:claim].merge(hunter_id: session[:user_id], perpetrator_id: params[:perpetrator_id]))
+    claim_params = params[:claim].merge(hunter_id: session[:user_id], perpetrator_id: params[:perpetrator_id])
+    claim_params[:description].gsub!(/</,"&lt;")
+    @claim = Claim.new(claim_params)
     if @claim.save
       flash[:notice] = %Q[Post claims thread to Reddit with ease! Click "POST TO REDDIT" contact authors of reports. Thank you!]
       redirect_to perpetrator_reports_path(@claim.perpetrator, claim: @claim)
