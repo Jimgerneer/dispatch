@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
   def create
     code = params[:code]
     if code
-      http = Faraday.new(url: "https://oauth.reddit.com")
+      http = Faraday.new(url: "https://ssl.reddit.com")
       http.basic_auth(ENV['REDDIT_KEY'], ENV['REDDIT_SECRET'])
       raw_response = http.post "/api/v1/access_token" do |req|
         req.body = {grant_type: "authorization_code", code: code, client_id: ENV['REDDIT_KEY'], client_secret: ENV['REDDIT_SECRET'], redirect_uri: sessions_url}
